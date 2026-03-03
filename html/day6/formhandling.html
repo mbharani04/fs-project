@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>formhandling</title>
+</head>
+<body>
+ <center>
+    <header>
+        <h1>Fill this form</h1>
+    </header>
+   
+    <form action="/submit" method="post">
+        <fieldset>
+         
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder ="enter your name" maxlength="30" required>
+        <br/> <br/>
+
+        <label for ="password">password</label>
+        <input type="text" id="Password" placeholder ="enter your password" minlength="10" required>
+        <br/>  <br/>
+        <label for ="phonenumber">Phone Number</label>
+        <input type="number" id="Phonenumber" placeholder ="enter your phone number" maxlength="10" required>
+        <br/>  <br/>
+        <label for="address">Address</label>
+        <textarea name="address" id="address" cols="30" rows="2" placeholder="enter your address"></textarea>
+        <div>
+        <label for="choose">Choose the course</label>
+        <select required>
+             <option><optgroup label="select an option"></optgroup></option>
+  
+        <option value="fn">Frontend</option>
+        <option value="bn">Backend</option>
+        <option value="db">Database</option>
+        </select>
+        </div>
+
+    </center>
+
+        <div>
+            <label for ="gender">Gender</label>
+            <br/>
+            <input type="checkbox" name="female" id="female" value="Female">
+            <label for ="female">Female</label>
+            <br/>
+            
+            <input type="checkbox" name="male" id="male" value="Male">
+            <label for ="male">Male</label>
+            <br/>
+            
+            <input type="checkbox" name="pefer" id="prefer" value ="Prefer not to say">
+            <label for ="prefer">Prefer not to say</label>
+
+        </div>
+        </fieldset>
+       <br>
+
+       
+        <input type ="submit" value="register" >
+    </form>
+
+
+
+<div>
+<pre>1. What is form - why we use ?</pre>
+<strong>Answer:</strong> A form is a structured document that allows users to input and submit data. 
+<pre>2. what is input ? why we use?</pre>
+<strong>Answer:</strong> An input field is an element in HTML that allows users to enter data. It is used to collect user information like name, email, password, etc.
+<pre> 3.what is select and why we use and what is option</pre>
+<strong>Ans:</strong> the select element is used to create a drop-down list.it allows user can choose the given opion. the options are the items
+<pre> 4. what is the use of value?</pre>
+<strong>Ans:</strong> the value is an values that is equals to an attribute of an element. to easy acess for user.
+
+<pre>5. what is the use of label ?  and what is the use of placeholder</pre>
+<strong>Ans:</strong> the label is used to define a label for an input element. it is used to provide a user-friendly description of the input field. the placeholder is used to provide a hint or example of what kind of data should be entered in the input field.
+</div>
+</body>
+</html>
