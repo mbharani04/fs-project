@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of Baroda</title>
+</head>
+<body>
+    
+    <center>   <h1>Bank form</h1></center>
+<form method ="post">
+   
+   <label for="date">DATE:</label>
+        <input type="date" id="date" name="date">
+   
+
+   <p> We request you to register your application for Internet banking facility& link your accounts with your branch/other branches with following
+    rights(choose one)</p>
+
+        <input type="checkbox" id="transc" name="rights" value="transaction"> 
+        <strong><td><label for ="transc">Transaction</label></td> </strong>
+        <input type="checkbox" id="view" name="rights" value="view">
+        <strong><td><label for ="view">Amount View Only</label></td></strong>
+         <input type="checkbox" id="with" name="with" value="with">
+        <strong><td><label for ="with">Withdrawal</label></td></strong>
+        
+<br/> <br/>
+
+<center>
+<table>
+    <strong>Fill the Form</strong>
+    <tr>
+        
+        <td>
+             <fieldset>
+              <legend><strong>ACCOUNT DETAILS</strong></legend>
+
+              <label for="account type">ACCOUNT TYPE:</label>
+<select required>
+       <optgroup label="Select Account Type">
+
+       <option value="">CHOOSE</option>
+       <option value="saving">Saving Account</option>
+         <option value="current">Current Account</option>
+          </optgroup>
+        </select>
+        <br/><br/>
+        <label for="name">NAME:</label>
+        <input type="text" id="name" placeholder="Enter your name" maxlength="30" required>
+        <br/><br/>
+        <label for ="accoun">ACCOUNT NUMBER:</label>
+        <input type ="number" id="accoun" placeholder="Enter account number" maxlength="15" required>
+       
+        <br/><br/>
+        <label for="location">LOCATION:</label>
+        <input type="text" id="location" placeholder="branch location" maxlength="30" required>
+    </fieldset>  
+
+</table>
+</center>      
+            <P><label for ="rup">RUPEES IN LETTERS:</label></P>
+  <textarea id="rup" name="rup" rows="4" cols="50"></textarea>
+  <span><label for="amount in number">AMOUNT IN NUMBER:</label>
+  <input type="number" id="amount in number" name="amount in number" required>
+  </span>
+
+  <center><p><input type="submit" value="Submit"></p></center>
+</table>   
+<hr/>
+<br/>
+<table border="4">
+    <thead>
+        <tr>
+            <th>ACCOUNT TYPE</th>
+            <th>NAME</th>
+            <th>ACCOUNT NUMBER</th> 
+            <th>LOCATION</th>
+                <th>RUPEES IN LETTERS</th>
+                <th>AMOUNT IN NUMBER</th>
+        </tr>
+    </thead>
+
+  <tbody>
+    <tr>
+        <td>Saving Account</td>
+        <td>Rohit Kumar</td>
+        <td>1234567890</td>
+        <td>Delhi</td>
+        <td>One Lakh Rupees Only</td>
+        <td>100000</td>
+    </tr>
+    <tr>
+        <td>Current Account</td>
+        <td>Priya Sharma</td>
+        <td>9876543210</td>
+        <td>Mumbai</td>
+        <td>Fifty Thousand Rupees Only</td>
+        <td>50000</td>
+    </tr>
+</table>
+     
+
+
+
+   
+    
+        
+       
+        
+
+
+
+
+    
+
+
+
+</form>
+</body>
+</html>

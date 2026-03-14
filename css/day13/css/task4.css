@@ -1,0 +1,12 @@
+.para{
+    font-size:18px;
+    width:60%;
+    margin:50px ;
+    
+}
+
+.para::first-letter{
+    color:red;
+    font-size:40px;
+    font-weight:bold;
+}

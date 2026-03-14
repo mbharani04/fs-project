@@ -1,0 +1,60 @@
+/* Element Selector */
+body{
+    font-family: Arial;
+    background-color: #fff8dc;
+    margin: 0;
+}
+
+/* ID Selector */
+#mainHeader{
+    background-color: brown;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Class Selector */
+.menu{
+    background-color: black;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Group Selector */
+.menu a, footer p{
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
+
+/* Class selector */
+.container{
+    margin: 30px;
+}
+
+/* Tea box design */
+.tea{
+    border: 2px solid brown;
+    padding: 20px;
+    margin: 15px;
+    display: inline-block;
+    width: 200px;
+    background-color: white;
+}
+
+/* Specificity Example */
+.tea h2{
+    color: brown;
+}
+
+/* ID has higher specificity */
+#footer{
+    background-color: black;
+    text-align: center;
+    padding: 15px;
+}
+
+/* !important rule */
+.special h2{
+    color: green !important;
+}
