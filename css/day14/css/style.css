@@ -1,0 +1,174 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#333;
+padding:15px 40px;
+}
+
+.navbar img{
+    width:50px;
+    height:40px;
+    border-radius:3px;
+}
+
+.menu{
+list-style:none;
+display:flex;
+gap:20px;
+}
+
+.menu a{
+text-decoration:none;
+color:white;
+transition:0.3s;
+}
+
+.menu a:hover{
+color:yellow;
+}
+
+
+
+.title{
+text-align:center;
+margin:40px 0 20px;
+}
+
+/* PRODUCT CARDS */
+
+.products{
+width:80%;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+text-align:center;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+.card button{
+margin-top:10px;
+padding:10px 20px;
+background:blue;
+color:white;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* IMAGE GALLERY */
+
+.gallery{
+width:80%;
+margin:40px auto;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+}
+
+.img-box{
+position:relative;
+overflow:hidden;
+}
+
+.img-box img{
+width:100%;
+transition:0.4s;
+}
+
+.img-box:hover img{
+transform:scale(1.1);
+}
+
+.img-box::after{
+content:"View Image";
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+font-size:20px;
+opacity:0;
+transition:0.3s;
+}
+
+.img-box:hover::after{
+opacity:1;
+}
+
+/* FLOATING CARD */
+
+.floating-card{
+width:300px;
+margin:50px auto;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+position:relative;
+transition:0.3s;
+}
+
+.floating-card:hover{
+transform:scale(1.05);
+}
+
+.badge{
+position:absolute;
+top:-10px;
+right:-10px;
+background:red;
+color:white;
+padding:5px 10px;
+border-radius:20px;
+z-index:1;
+}
+
+/* MOBILE VIEW */
+
+@media(max-width:768px){
+
+.navbar{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.menu{
+flex-direction:column;
+margin-top:10px;
+}
+
+.products{
+grid-template-columns:1fr;
+}
+
+.gallery{
+grid-template-columns:1fr;
+}
+
+}

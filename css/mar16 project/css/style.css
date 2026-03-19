@@ -1,0 +1,57 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    
+}
+
+h1{
+    color: red;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px ;
+    border-radius: 2px;
+   
+}
+
+.userpw{
+    padding: 10%;
+    
+}
+#sign{
+    padding: 5px;
+    color: black;
+    background-color: gold;
+    border:none;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: 0.5s ;
+    
+}
+
+#sign:hover{
+    width: 300px;
+    background-color: rgb(228, 173, 24);
+
+
+}
+#login{
+    padding: 5px;
+    color:whitesmoke;
+    background-color: navy;
+    border:none;
+    border-radius: 2px;
+    transition: 0.5s;
+    
+}
+
+
+fieldset{
+    background-color: whitesmoke;
+    box-shadow: 4px 4px 15px grey;
+}
+
