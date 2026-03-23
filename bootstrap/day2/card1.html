@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIKE | SCOOTY</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/card1.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.jpg">
+</head>
+<body>     
+<div class="form-wrapper">
+    <div class="premium-container">
+        <div class="form-header">
+            <h2>Bike Service Booking</h2>
+            <p>Fill out the details below to book your premium service.</p>
+        </div>
+
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe *" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group row">
+                <div>
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="Enter phone number *" required>
+                </div>
+                <div>
+                    <label>Alternate Number</label>
+                    <input type="tel" placeholder="Optional">
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="john@example.com *" required>
+            </div>
+
+            <!-- State & District -->
+            <div class="form-group row">
+                <div>
+                    <label>State</label>
+                    <select required>
+                        <option value="">Select State</option>
+                        <option>Tamil Nadu</option>
+                        <option>Karnataka</option>
+                    </select>
+                </div>
+                <div>
+                    <label>District</label>
+                    <select required>
+                        <option value="">Select District</option>
+                        <option>Chennai</option>
+                        <option>Coimbatore</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Local Area & Pincode -->
+            <div class="form-group row">
+                <div>
+                    <label>Local Area</label>
+                    <input type="text" placeholder="Enter local area *" required>
+                </div>
+                <div>
+                    <label>Pincode</label>
+                    <input type="text" placeholder="Enter Pincode" required>
+                </div>
+            </div>
+
+            <!-- Showroom -->
+            <div class="form-group">
+                <label>Nearby Showroom</label>
+                <select required>
+                    <option value="">Select Nearby Showroom</option>
+                    <option>TVS Showroom</option>
+                    <option>Honda Service Center</option>
+                </select>
+            </div>
+
+            <!-- Optional Fields -->
+            <div class="form-group">
+                <label>Address Details <span class="optional">(Optional)</span></label>
+            </div>
+            <div class="form-group row">
+                <input type="text" placeholder="House Number">
+                <input type="text" placeholder="Street Name">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Nearby Landmark">
+            </div>
+
+            <!-- Pickup, Drop & Payment -->
+            <div class="form-group row">
+                <div>
+                    <label>Pickup Vehicle</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Drop Vehicle</label>
+                    <select>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Payment Method</label>
+                <select required>
+                    <option>UPI</option>
+                    <option>GPay</option>
+                    <option>PhonePe</option>
+                    <option>Cash on Delivery (+₹10)</option>
+                    <option>Credit Card</option>
+                </select>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn-submit">Submit Booking</button>
+
+            <div class="form-footer">
+                <p>Before submitting, please verify all details are correct.</p>
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

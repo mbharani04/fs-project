@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUEL | SERVICES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/card2.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.jpg">
+</head>
+<body>
+<div class="form-wrapper">
+    <div class="premium-container">
+        <div class="form-header">
+            <h2>Fuel Service Booking</h2>
+            <p>Schedule your premium fuel delivery & service.</p>
+        </div>
+
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe *" required>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group row">
+                <div>
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="Enter phone number *" required>
+                </div>
+                <div>
+                    <label>Alternate Number</label>
+                    <input type="tel" placeholder="Optional">
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" placeholder="john@example.com *" required>
+            </div>
+
+            <!-- Vehicle Details -->
+            <div class="form-group row">
+                <div>
+                    <label>Vehicle Type</label>
+                    <select required>
+                        <option value="">Select Vehicle</option>
+                        <option>Bike</option>
+                        <option>Scooty</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Fuel Type</label>
+                    <select required>
+                        <option value="">Select Fuel</option>
+                        <option>Petrol</option>
+                        <option>Diesel</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Quantity & Date -->
+            <div class="form-group row">
+                <div>
+                    <label>Fuel Quantity (Liters)</label>
+                    <input type="number" placeholder="Enter liters" required>
+                </div>
+                <div>
+                    <label>Scheduled Date</label>
+                    <input type="date" required>
+                </div>
+            </div>
+
+            <!-- Time & Pickup -->
+            <div class="form-group row">
+                <div>
+                    <label>Scheduled Time</label>
+                    <input type="time" required>
+                </div>
+                <div>
+                    <label>Need Pickup & Drop?</label>
+                    <select>
+                        <option>No, Deliver to me</option>
+                        <option>Yes, Pickup my vehicle</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Book Service</button>
+
+            <div class="form-footer">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
