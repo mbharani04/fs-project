@@ -1,0 +1,124 @@
+<script>
+    function login_page() {
+    let username = "admin";
+    let password = "1234";
+    let userInput = "admin";
+    let passwordInput = "1234";
+
+    if (userInput === username && passwordInput === password) {
+        console.log("Login Success");
+    } else {
+        console.log("Login Failed");
+    }
+}
+
+login_page();
+
+function gradeSystem() {
+    let students_mark = 82;
+
+    if (students_mark >= 90) {
+        console.log("Grade A");
+    } else if (students_mark >= 75) {
+        console.log("Grade B");
+    } else if (students_mark >= 50) {
+        console.log("Grade C");
+    } else {
+        console.log("Fail");
+    }
+}
+gradeSystem();
+
+
+function leapYear() {
+    let year = 2004;
+
+    if ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)) {
+        console.log("Leap Year");
+    } else {
+        console.log("Not a Leap Year");
+    }
+}
+leapYear();
+
+function divisibleCheck() {
+    let setNum = 25;
+
+    if (setNum % 6 === 0 && setNum % 7 === 0) {
+        console.log("Divisible by both 6 and 7");
+    } else if (setNum % 6 === 0) {
+        console.log("Divisible by 6 only");
+    } else if (setNum % 7 === 0) {
+        console.log("Divisible by 7 only");
+    } else {
+        console.log("Not divisible by 6 or 7");
+    }
+}
+divisibleCheck();
+
+function discountCalc() {
+    let priceValue = 900;
+
+    if (priceValue > 700) {
+        let discount = priceValue * 0.5;
+        let finalPrice = priceValue - discount;
+        console.log("Discount applied:", discount);
+        console.log("Final Price:", finalPrice);
+    } else {
+        console.log("No Discount");
+    }
+}
+discountCalc();
+
+function temperatureCheck() {
+    let tempValue = 25;
+
+    if (tempValue > 30) {
+        console.log("Hot");
+    } else if (tempValue >= 20 && tempValue <= 30) {
+        console.log("Normal");
+    } else {
+        console.log("Cold");
+    }
+}
+temperatureCheck();
+
+function characterCheck() {
+    let SetChar = "b";
+
+    if (SetChar >= "A" && SetChar <= "Z") {
+        console.log("Uppercase");
+    } else if (SetChar >= "a" && SetChar <= "z") {
+        console.log("Lowercase");
+    } else {
+        console.log("Not an alphabet");
+    }
+}
+characterCheck();
+
+function rangeCheck() {
+    let setNum = 60;
+
+    if (setNum >= 80 && setNum <= 50) {
+        console.log("Number is between 80 and 50");
+    } else {
+        console.log("Number is outside range");
+    }
+}
+rangeCheck();
+
+function bonusCheck() {
+    let setNum = 45;
+
+    if ((setNum % 2 === 0 && setNum > 10) || (setNum % 5 === 0)) {
+        console.log("Condition satisfied");
+    } else {
+        console.log("Condition not satisfied");
+    }
+}
+bonusCheck();
+
+
+
+
+</script>
