@@ -1,0 +1,274 @@
+js_day6:(day 22 sla):
+
+task -4 wrote in notebook
+-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+test:- completed
+-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+js_day8 (day23 sla):
+
+1️⃣ Simple Callback Execution
+Create a function process that takes a callback and executes it.
+
+2️⃣ Add Using Callback
+Create a function that takes two numbers and a callback.
+Callback should return the sum.
+
+3️⃣ Multiply Using Callback
+Pass a callback to multiply two numbers and print result.
+
+4️⃣ Even Check Callback
+Create a function that takes a number and a callback.
+Callback should check whether the number is even or odd.
+
+5️⃣ Greeting Callback
+Create a function that takes a name and a callback.
+Callback should print:
+👉 "Welcome [name]"
+
+6️⃣ Array Callback (forEach)
+Given an array [10, 20, 30], use a callback to print all values.
+
+7️⃣ Filter Callback
+Given [1,2,3,4,5], use a callback to return only even numbers.
+
+📝 Closure Tasks (8)
+8️⃣ Simple Counter
+Create a function that returns another function.
+Each time inner function is called → increase count.
+
+9️⃣ Private Variable
+Create a function with a private variable secret = 100.
+Return a function that prints the value.
+
+🔟 Add Closure
+Create a function that takes a number and returns another function.
+Inner function should add another number.
+
+👉 Example:
+
+add(5)(10) → 15
+1️⃣1️⃣ Multiply Closure
+Same like above, but multiply numbers.
+
+1️⃣2️⃣ Message Closure
+Create a function that stores a message.
+Return a function to print that message later.
+
+1️⃣3️⃣ User Login Closure
+Store username in outer function.
+Inner function should print:
+👉 "User [name] logged in"
+
+1️⃣4️⃣ Counter with Reset
+Create a counter using closure.
+Add another function to reset value.
+
+1️⃣5️⃣ Data Storage Closure
+Store an array inside outer function.
+Inner function should add values to that array and print it.
+-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+js_day24 : i changed folder name according to sla portal day number
+
+Task
+🧩 Task 1 — useMemo (Sorting Numbers)
+
+👉 Create:
+
+array of random numbers
+
+👉 Task:
+
+sort the array (ascending) using loop or built-in
+
+use useMemo
+
+👉 Add:
+
+button → generate new array
+
+button → toggle theme
+
+👉 Condition:
+
+sorting should run only when array changes
+
+🧩 Task 2 — useMemo (Search Filter)
+👉 Create:
+
+list of 5000 names
+
+👉 Task:
+
+filter names based on search input
+
+use useMemo
+
+👉 Add:
+
+input field → search
+
+button → toggle theme
+
+👉 Condition:
+
+filtering should NOT run on theme change
+
+🧩 Task 3 — useCallback (Event Handler Optimization)
+👉 Create:
+
+parent + child component
+
+👉 Task:
+
+pass a function to child
+
+function should calculate square of a number with loop
+
+👉 Use:
+
+useCallback
+
+wrap child with React.memo
+
+👉 Add:
+
+button → change theme
+
+👉 Condition:
+
+child should NOT re-render on theme change
+
+-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+
+js_day25:
+
+🔹 map() Tasks
+
+1️⃣ Double Values
+Given [1,2,3,4], create a new array with all values doubled.
+
+2️⃣ Convert to String
+Given [1,2,3], convert all numbers to strings.
+
+3️⃣ Add Prefix
+Given ["apple","banana"], add "fruit: " before each value.
+
+🔹 filter() Tasks
+4️⃣ Even Numbers
+Given [1,2,3,4,5,6], return only even numbers.
+
+5️⃣ Greater Than 50
+Given [10,60,30,80], return values greater than 50.
+
+6️⃣ Filter Names
+Given ["Ram","Ravi","John"], return names starting with "R".
+
+🔹 find() Tasks
+7️⃣ First Greater Value
+Given [10,20,30,40], find first value greater than 25.
+
+8️⃣ Find User
+Given array of users, find user with age > 25.
+
+🔹 reduce() Tasks
+9️⃣ Sum of Numbers
+Given [1,2,3,4], find total sum.
+
+🔟 Find Maximum
+Given [10,50,20,80], find maximum value using reduce.
+
+1️⃣1️⃣ Count Total
+Given [5,5,5], find total sum.
+
+🔹 some() Tasks
+1️⃣2️⃣ Check Even Exists
+Given [1,3,5,6], check if any even number exists.
+
+1️⃣3️⃣ Age Check
+Check if any user has age less than 18.
+
+🔹 every() Tasks
+1️⃣4️⃣ All Even Check
+Check if all numbers in [2,4,6] are even.
+
+1️⃣5️⃣ All Passed
+Check if all marks are above 40.
+
+🔹 forEach() Tasks
+1️⃣6️⃣ Print Values
+Print all values in [10,20,30].
+
+1️⃣7️⃣ Sum Using forEach
+Find sum of [1,2,3,4] using forEach.
+
+🔥 Mixed Real-Time Tasks
+1️⃣8️⃣ Product Filter
+Given products array, filter items with price > 1000.
+
+1️⃣9️⃣ User Names
+From array of users, extract only names using map.
+
+2️⃣0️⃣ Total Price
+Calculate total price of cart using reduce.
+
+-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
+js_day26:
+
+1️⃣ Arrow Function
+Convert a normal function to an arrow function that adds two numbers.
+
+2️⃣ let & const
+Create two variables using let and const.
+Try updating both and observe behavior.
+
+3️⃣ Template Literals
+Print:
+👉 "Hello Rere, your age is 25"
+using template literals.
+
+4️⃣ Default Parameter
+Create a function that takes a name.
+If no name is passed → print "Guest".
+
+5️⃣ Ternary Operator
+Check if a number is even or odd using ternary.
+
+6️⃣ Array Destructuring
+Given [10,20,30], extract first two values using destructuring.
+
+7️⃣ Object Destructuring
+Given {name:"Rere", age:25}, extract values into variables.
+
+8️⃣ Spread Operator (Array)
+Merge two arrays [1,2] and [3,4] using spread.
+
+9️⃣ Spread Operator (Object)
+Add new property city:"Chennai" to an object using spread.
+
+🔟 Rest Operator (Function)
+Create a function that takes multiple numbers and returns sum using rest.
+
+1️⃣1️⃣ Rest with Destructuring
+Given [1,2,3,4], store first value in a and remaining in rest.
+
+1️⃣2️⃣ Optional Chaining
+Access user.name safely when object may be empty.
+
+1️⃣3️⃣ Nullish Coalescing
+If variable is null, print "Default Value".
+
+1️⃣4️⃣ Short Property
+Create object using shorthand property from variables.
+
+
+
+
+
+
+
+
