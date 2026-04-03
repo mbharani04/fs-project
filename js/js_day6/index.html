@@ -50,6 +50,38 @@
         console.log("10:", orGate[2][0] + " OR " + orGate[2][1] + " = " + orGate[2][2]);  
         console.log("10:", orGate[3][0] + " OR " + orGate[3][1] + " = " + orGate[3][2]);  
 
+   let nestedArray = [10, 20, [30, 40, [50, 60]]];
+
+        console.log("nestedarray:  11:",nestedArray[0]);     
+        console.log("11:", nestedArray[2][0]);     
+        console.log("11:", nestedArray[2][2][1]); 
+        
+        
+   let XorGate = [[0,0,[0]],[0,1,[1]],[1,0,[1]],[1,1,[0]]];
+       console.log("12:" , XorGate[0][0] +"  "+ "XOR" + "  "+ XorGate [0][1] + "  "+"=" + "  "+ XorGate [0][2][0]);
+       console.log("12:" , XorGate[1][0] +"  "+ "XOR" + "  "+ XorGate [1][1] + "  "+"=" + "  "+ XorGate [1][2][0]);
+       console.log("12:" , XorGate[2][0] +"  "+ "XOR" + "  "+ XorGate [2][1] + "  "+"=" + "  "+ XorGate [2][2][0]);
+       console.log("12:" , XorGate[3][0] +"  "+ "XOR" + "  "+ XorGate [3][1] + "  "+"=" + "  "+ XorGate [3][2][0]);
+
+   let  nestedInner =[1, [2, 3], 4];
+       console.log("13:", nestedInner[1]); 
+       
+   let nestedOuter = [1, [2, 3], 4];
+       console.log("14:",nestedOuter); 
+
+   let nestedFlatten = [1, [2, 3], [4, [5]]];
+   let flat = nestedFlatten.flat(Infinity);
+        console.log("15:", flat); 
+
+
+   let mixedArr = [1, "hello", true, [2, 3], {name: "A"}, null];
+        console.log("mixed array: 16:", mixedArr);
+
+   let mixDatatype = [1, "hello", true, [2, 3], {name: "A"}, null];
+       for (let i = 0; i < mixDatatype.length; i++) {
+       console.log("17: ",mixDatatype[i], "→", typeof mixDatatype[i]);}
+     
+   let stumarks = [78, 85, 90, 66, 88];
 
 
 
