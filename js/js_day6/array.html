@@ -81,7 +81,103 @@
        for (let i = 0; i < mixDatatype.length; i++) {
        console.log("17: ",mixDatatype[i], "→", typeof mixDatatype[i]);}
      
-   let stumarks = [78, 85, 90, 66, 88];
+   let stuMarks = [78, 85, 90, 66, 88];
+        console.log("18:   First mark:", stuMarks[0]);
+        console.log("last mark:", stuMarks[stuMarks.length - 1]);
+
+        let sum = 0;
+        for(let i = 0; i < stuMarks.length; i++){
+            sum += stuMarks[i];
+        }
+        let average = sum / stuMarks.length;
+        console.log("average:", average);  
+        
+    let playList = ["Song1", ["Song2", "Song3"], "Song4"];
+        let flatten = playList.flat(Infinity);
+        console.log("19:", flatten);
+
+   let teams = ["HR", ["Dev1", "Dev2"], ["QA1", "QA2"]];
+     sum =0;
+         for (let i = 0; i < teams[i].length; i++) {
+            sum += teams[i].length;     
+         }
+        
+         console.log("20:", sum);
+     
+    let cart = ["Milk", "Bread", "Eggs", "Butter"];   
+         cart[2] = "Cheese";
+         console.log("21:", cart);
+
+    let contactsName = ["A", "B", "C", "D"];
+    sum = 0;
+      for (let i=0; i< contactsName.length; i++){
+        if( i %2 == 0){
+            console.log("22: ", contactsName[i]);   
+        }
+      }
+
+
+     let output_arraytype = ["A", "B", "C", "D"];
+     let result = [];
+ 
+      for (let i=0; i< output_arraytype.length; i++){
+        if( i %2 == 0){      
+                result.push(output_arraytype[i]);              
+        }
+      }
+       console.log("23: ", result)
+
+    let menuCard = ["Veg", ["Paneer", "Dal"], ["Chicken", "Fish"]];
+        console.log("24:", menuCard[2]);
+       
+    let expenses_cost = [100, [200, 300], 400];
+
+     let sumvalue= 0;
+
+for (let i = 0; i < expenses_cost.length; i++) {
+  let elementValue = expenses_cost[i];
+
+  if (Array.isArray(elementValue)) {
+    
+    for (let j = 0; j < elementValue.length; j++) {
+      sumvalue += elementValue[j];
+    }
+  } else {
+    sumvalue += elementValue;
+  }
+}
+
+console.log("25:", sumvalue);
+
+
+let arr = [1, "hello", [2, 3], null, {age: 20}];
+console.log("26:" , typeof(arr[1]) , typeof(arr[2]) , typeof(arr[3]) , typeof(arr[4]) ); 
+
+        
+let comments = ["Good", ["Nice", ["Awesome", "Cool"]], "Okay"];
+let flatitems = comments.flat(Infinity);
+console.log("27:", flatitems);
+
+
+let post = ["User1", "Nice post!", ["like1", "like2"], {shares: 10}];
+let username = post[0];
+let totalLikes = post[2].length;
+let shares = post[3].shares;
+
+console.log("28:    Username:", username);
+console.log("28:    Total Likes:", totalLikes);
+console.log("28:    Shares:", shares);
+
+let arrLen = [7, 14, 21, 28];
+console.log("29:    Length of array:", arrLen.length);
+
+let arrReverse = [1, 2, 3, 4];
+      let arrresult = [];
+for (let i = arrReverse.length - 1; i >= 0; i--) {
+  arrresult.push(arrReverse[i]);
+}
+console.log("30:    Reversed array:", arrresult);
+
 
 
 
