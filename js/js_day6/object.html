@@ -8,7 +8,77 @@
     let objValue= { a: 5, b: 10, c: 15 };
         console.log(objValue.a + objValue.b + objValue.c);
 
+    console.log("example 3: sub two number");
+    let obj_sub ={ num1: 25, num2: 15};
+        console.log(obj_sub.num1 - obj_sub.num2);
 
+     console.log("example 4: multiply two number");
+     let obj_mul = { x: 4, y: 6 };
+        console.log(obj_mul.x * obj_mul.y);
+
+     console.log("example 5: divide two number");
+     let obj_div = { p: 20, q: 5 };
+        console.log(obj_div.p / obj_div.q);
+
+    console.log("example 6: modulus of two number");
+    let obj_mod = { m: 13, n: 5 };
+        console.log(obj_mod.m % obj_mod.n);
+    
+    console.log("example 7: using for in loop");
+    let objForin = { a:1 ,b:4, c:10};
+    let sum = 0;
+          for (let i in objForin){
+            sum += objForin[i];
+           
+          }
+           console.log(sum);
+
+
+ 
+
+   console.log("example 8: using for loop to find product");
+    let objProduct = { mobile:20 , laptop: 30 , tab: 40};
+            
+            console.log(objProduct);
+
+   console.log("example 9: sum")
+   let obj = { x: 5, y: 15 };
+     console.log(obj["x"] + obj["y"]);
+
+    console.log("example 10: product");
+
+    let objMulti = { a: 4, b: 10};
+    console.log(objMulti["a"] * objMulti["b"]);
+
+ console.log("example 11: nested object");
+    let nestedObj ={ a :1, b:2, c:{d:3, e:4}, f:5};
+           console.log(nestedObj);
+
+  console.log("example 12: nested obje printing like array");
+    let nested_obj ={ a:10, b:13, c:14};
+    console.log(nested_obj);
+
+   console.log("example 13: nested obje printing like array");
+    let nested_ob ={ a:40, b:13, c:14};
+    console.log(nested_ob); 
+    
+    console.log("example 14: sum of nested obj");
+    let nested_sum = { a : 34, b:46 , c:{d:13, e:45}}
+    console.log(nested_sum.a + nested_sum.b + nested_sum.c.d + nested_sum.c.e);
+
+
+    console.log("example 15: sum greater than 10 using obj");
+    let greSum = { x: 95, y:3, z: 67 }
+    sum = 0;
+    for (let i in greSum){
+        let value = greSum[i];
+        if (value >= 10){
+            sum += value;
+        }
+    }
+    console.log(sum);
 
     
+    
+            
 </script>
