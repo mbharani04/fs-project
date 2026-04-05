@@ -1,0 +1,58 @@
+<script>
+    let squareMethod = x => x * x;
+    console.log("1.",squareMethod(5)); 
+
+    let divValue = (a, b) => a / b;
+     console.log("2.",divValue(10, 2)); 
+
+    let multiplyValue = (a, b) => {
+    let result = a * b;
+    return result;
+    };
+     console.log("3.",multiplyValue(2, 6));
+
+     let printName = (name = "everyone") => "Hello " + name;
+      console.log("4.",printName());        
+     
+
+      let getUser = (name, age) => ({ name: name, age: age });
+      console.log("5.",getUser(" Ram", 21));
+
+    let sumArray = arr => {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+    };
+    console.log("6:",sumArray([1, 2, 10]));
+
+    let totalSum = (...nums) => {
+    let sum = 0;
+    for (let n of nums) {
+        sum += n;
+    }
+    return sum;
+    };
+     console.log("7:",totalSum(1, 2, 3, 4)); 
+
+     let calc = (a, b) => {
+    let add = (x, y) => x + y;
+    return add(a, b);
+     };
+    console.log("8:",calc(5, 5)); 
+
+    let checkEven = num => num % 2 === 0 ? "Even" : "Odd";
+    console.log("9:",checkEven(4)); 
+    
+
+    let numbers = [1, 2, 3];
+    let usingMap = numbers.map(n => n * 2);
+      console.log("10:",usingMap); 
+
+
+
+
+
+</script>
+
