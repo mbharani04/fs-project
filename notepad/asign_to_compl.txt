@@ -1,37 +1,7 @@
-js_day6:(day 22 sla):
 
-task -4 wrote in notebook
--------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------
-test:- completed
--------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------
 js_day8 (day23 sla):
 
-1️⃣ Simple Callback Execution
-Create a function process that takes a callback and executes it.
 
-2️⃣ Add Using Callback
-Create a function that takes two numbers and a callback.
-Callback should return the sum.
-
-3️⃣ Multiply Using Callback
-Pass a callback to multiply two numbers and print result.
-
-4️⃣ Even Check Callback
-Create a function that takes a number and a callback.
-Callback should check whether the number is even or odd.
-
-5️⃣ Greeting Callback
-Create a function that takes a name and a callback.
-Callback should print:
-👉 "Welcome [name]"
-
-6️⃣ Array Callback (forEach)
-Given an array [10, 20, 30], use a callback to print all values.
-
-7️⃣ Filter Callback
-Given [1,2,3,4,5], use a callback to return only even numbers.
 
 📝 Closure Tasks (8)
 8️⃣ Simple Counter
