@@ -1,5 +1,60 @@
 <script>
    
+
+const arrowFunction = () => "ex1: arrowfunction starts"
+    console.log(arrowFunction());
+
+const skipCurly = (a,b)=> a*b ;
+ let multiValue = skipCurly (23,92);
+    console.log("ex2: ", multiValue);
+
+const UsingCurly = (a,b) => {  
+    return a+b;}
+    let addEle = UsingCurly (15,15);
+    console.log("ex3: ", addEle);
+
+const singleParameter = (a) => a*a ;
+  let square = singleParameter (6);
+    console.log("ex 4:", square);
+
+const one_statement = () => "ex 1 & 2 this is an one statement"
+console.log(one_statement());
+
+const multi_statement = (a,b) => {
+    let sum = a+b;
+    let multi = a*b;
+    return `ex 6: the sum is ${sum} and the multiplication is ${multi}`;
+}
+console.log(multi_statement(15, 15));
+
+const noParameter = x => x*x;
+     let value = noParameter(5);
+    console.log("ex 7: omiting parathesis", value);
+
+const UsingParathesis = () => `print like as i gave;`
+    console.log("ex 8: using parathesis", UsingParathesis());
+
+const  usingReturn = (x,y,z) =>{
+    return x+y+z;
+}
+let sum = usingReturn(10,20,30);
+console.log("ex 9: using return", sum);
+
+
+const bestWay = (a,b) => {
+    return a%b;
+}
+let remainder = bestWay(10,3);
+console.log("ex 10:answer for 10 % 3=", remainder);
+
+
+
+
+
+
+
+
+
    
 
 </script>
