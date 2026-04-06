@@ -78,6 +78,103 @@ let evenNumbers = numbers.filter((num) => {
     return num % 2 === 0;
 });
 console.log(evenNumbers);
+//8 clousure
+function outer() {
+    let name = "hello";
+    function inner() {
+        console.log(name); 
+    }
+    return inner;
+}
+let myFunc = outer(); 
+myFunc(); 
+
+//9️⃣ Private Variable
+//Create a function with a private variable secret = 100.
+//Return a function that prints the value.
+
+function createSecret() {
+    let secret = 100;
+    return function () {
+        console.log(secret);
+    };
+}
+let showSecret = createSecret();
+showSecret();
+
+
+//10
+function addFunction(t) {
+    return function (y) {
+        return t + y;
+    };
+}
+console.log(addFunction(15)(18)); 
+
+//11
+function multiplyFunction(a) {
+    return function (b) {
+        return a * b;
+    };
+}
+console.log(multiplyFunction(67)(48)); 
+
+//12
+function message(msg) {
+    return function () {
+        console.log(msg);
+    };
+}
+
+let sayHello = message("Hello everyone!!");
+sayHello(); 
+
+//13
+function userLogin(name) {
+    return function () {
+        console.log("User " + name + " logged in");
+    };
+}
+
+let login = userLogin("root");
+login(); 
+
+//14
+function counter() {
+    let count = 0;
+    return {
+        increment: function () {
+            count++;
+            console.log(count);
+        },
+        reset: function () {
+            count = 0;
+            console.log("Reset to 0");
+        }
+    };
+}
+let c = counter();
+c.increment(); 
+c.increment(); 
+c.reset();     
+c.increment(); 
+
+//15
+
+function dataStorage() {
+    let arr = [];
+
+    return function (value) {
+        arr.push(value);
+        console.log(arr);
+    };
+}
+
+let store = dataStorage();
+store(10);
+store(20); 
+store(30); 
+
 
 
 

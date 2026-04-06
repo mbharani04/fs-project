@@ -1,3 +1,147 @@
 <script>
-    console.log("Convert a normal function to an arrow function that adds two numbers...") 
-</script>
+    //1
+    const AddNumbers = (firstNumber, secondNumber) => {
+    return firstNumber + secondNumber;
+};
+
+console.log(AddNumbers(92, 77)); 
+//2
+let userAge = 20;
+const userName = "Rere";
+userAge = 25; 
+console.log(userAge, userName);
+
+//3
+let nameValue = "Rere";
+let ageValue = 25;
+
+console.log(`Hello ${nameValue}, your age is ${ageValue}`);
+
+//4
+function ShowName(nameValue = "Guest") {
+    console.log(nameValue);
+}
+
+ShowName("Rere"); 
+ShowName();      
+
+//5
+function CheckEvenOdd(numberValue) {
+    let resultValue = numberValue % 2 === 0 ? "Even" : "Odd";
+    console.log(resultValue);
+}
+
+CheckEvenOdd(4); 
+
+//6
+let numberArray = [10, 20, 30];
+let [firstValue, secondValue] = numberArray;
+console.log(firstValue, secondValue);
+
+//7
+let userObject = { name: "Rere", age: 25 };
+let { name, age } = userObject;
+console.log(name, age);
+
+//8
+let firstArray = [1, 2];
+let secondArray = [3, 4];
+let mergedArray = [...firstArray, ...secondArray];
+console.log(mergedArray); 
+
+//9
+let userDetails = { name: "Rere", age: 25 };
+
+let updatedUserDetails = {
+    ...userDetails,
+    city: "Chennai"
+};
+
+console.log(updatedUserDetails);
+
+//10
+function GetSum(...numbers) {
+    return numbers.reduce((totalValue, currentValue) => totalValue + currentValue, 0);
+}
+
+console.log(GetSum(1, 2, 3, 4));
+
+//11
+let numberList = [1, 2, 3, 4];
+
+let [a, ...restValues] = numberList;
+
+console.log(a);         
+console.log(restValues); 
+
+//12S
+let userData = {};
+console.log(userData?.name); 
+
+//13
+let valueData = null;
+let resultData = valueData ?? "Default Value";
+console.log(resultData); 
+
+//14
+let namestate = "Rere";
+let ageval = 25;
+let userInfo = { namestate  , ageval };
+console.log(userInfo);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </script>
