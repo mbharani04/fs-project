@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form using js + dom</title>
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+<body>
+    <header>
+        <h1 class = "text-2xl font-bold m-2 flex justify-center bg-blue-400"> Here the example for using the html + dom + js</h1>
+    </header>
+    
+    <main>
+        <div class = "flex justify-center m-2 bg-orange-400 p-6">
+            <button id ="redbtn"class = "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-3">RED</button>
+            <button id ="yellowbtn"class = "bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded m-3">YELLOW</button>
+            <button id ="greenbtn" class = "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded m-3">GREEN</button>
+        </div>
+
+        <div>
+            <input type="text" id ="colorInput" placeholder="enter the color" class="bg-gray-300 border-black rounded-md  py-2 px-4 m-5 flex justify-center">
+        </div>
+
+       <p id="para"></p>
+       
+       
+       <div class = "flex justify-center" >
+       <div id = "circleColor" class="flex justify-center items-center  w-100 h-100 bg-red-500 rounded-full py-2 px-4 m-5 " >
+           changing color type after click
+       </div>
+       </div>
+
+
+    </main>
+
+
+
+
+
+    <script src = "form.js"></script>
+  
+</body>
+</html>
