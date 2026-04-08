@@ -1,0 +1,32 @@
+<script>
+    let user = {
+  name: "Ram",
+  age: 25
+};
+
+let data = JSON.stringify(user);
+console.log(data);
+
+let datan = '{"subj": "react"}';
+
+let userm = JSON.parse(datan);
+console.log(userm.subj);
+
+
+
+let userfun = {
+  username: "bharani",
+  password: "1234"
+};
+
+// store
+localStorage.setItem("user", JSON.stringify(userfun));
+
+// get
+let storedUser = JSON.parse(localStorage.getItem("user"));
+
+console.log(storedUser.username);
+console.log(storedUser.password);
+
+
+</script>
