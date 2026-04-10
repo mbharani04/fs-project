@@ -1,22 +1,19 @@
-// 🔁 Page Switch
 function showPage(pageId) {
   document.getElementById("signup-page").classList.add("hidden");
   document.getElementById("login-page").classList.add("hidden");
   document.getElementById(pageId).classList.remove("hidden");
 }
 
-// 🎯 Elements
 const signupBtn = document.getElementById("signupBtn");
 const loginBtn = document.getElementById("loginBtn");
 const goLogin = document.getElementById("goLogin");
 const goSignup = document.getElementById("goSignup");
 const logoutBtn = document.getElementById("logoutBtn");
 
-// 🔗 Navigation
 goLogin.addEventListener("click", () => showPage("login-page"));
 goSignup.addEventListener("click", () => showPage("signup-page"));
 
-// 📝 Signup
+
 signupBtn.addEventListener("click", () => {
   const username = document.getElementById("signup-username").value;
   const email = document.getElementById("signup-email").value;
@@ -29,29 +26,30 @@ signupBtn.addEventListener("click", () => {
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
-  let exists = users.find(user => user.username === username);
+  let exists = users.find(user => user.email === email);
   if (exists) {
     alert("User already exists!");
     return;
   }
 
   users.push({ username, email, password });
-
   localStorage.setItem("users", JSON.stringify(users));
 
   alert("Signup successful!");
   showPage("login-page");
 });
 
-// 🔐 Login
+
 loginBtn.addEventListener("click", () => {
-  const username = document.getElementById("login-username").value;
+  const input = document.getElementById("login-username").value;
   const password = document.getElementById("login-password").value;
 
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
   let validUser = users.find(
-    user => user.username === username && user.password === password
+    user =>
+      (user.username === input || user.email === input) &&
+      user.password === password
   );
 
   if (validUser) {
@@ -66,7 +64,7 @@ loginBtn.addEventListener("click", () => {
   }
 });
 
-// 🔓 Logout
+
 logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("currentUser");
 
@@ -74,7 +72,6 @@ logoutBtn.addEventListener("click", () => {
   document.getElementById("auth-container").classList.remove("hidden");
 });
 
-// 🔁 Auto Login
 window.onload = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -84,13 +81,12 @@ window.onload = () => {
   }
 };
 
-// 📦 Show Users Page
 function showUsersPage() {
   document.getElementById("auth-container").classList.add("hidden");
   document.getElementById("user-section").classList.remove("hidden");
 }
 
-// 🌐 Fetch Users
+
 function fetchUsers() {
   fetch("https://dummyjson.com/users")
     .then(res => res.json())
@@ -98,10 +94,9 @@ function fetchUsers() {
     .catch(err => console.log(err));
 }
 
-// 🎨 Display Cards
+
 function displayUsers(users) {
   const container = document.getElementById("user-container");
-
   container.innerHTML = "";
 
   users.forEach(user => {
