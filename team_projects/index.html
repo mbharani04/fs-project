@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CosmosExplorer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --space-bg: #020818;
+    --star-color: rgba(255,255,255,0.8);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--space-bg);
+    font-family: 'Exo 2', sans-serif;
+    color: #e2e8f0;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  h1, h2, h3, .font-orbitron { font-family: 'Orbitron', monospace; }
+
+  /* STARS BACKGROUND */
+  #stars-canvas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* PAGES */
+  .page { display: none; min-height: 100vh; position: relative; z-index: 1; }
+  .page.active { display: block; }
+
+  /* PLANET CARDS */
+  .planet-card {
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .planet-card:hover {
+    transform: translateY(-12px) scale(1.03);
+  }
+  .planet-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    border-radius: inherit;
+  }
+  .planet-card:hover::before { opacity: 1; }
+
+  /* PLANET SPHERE */
+  .planet-sphere {
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+    position: relative;
+    box-shadow: inset -20px -10px 40px rgba(0,0,0,0.5);
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+  .planet-sphere::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.25), transparent 60%);
+    inset: 0;
+  }
+
+  /* RINGS */
+  .ring-wrapper {
+    position: relative; display: inline-block;
+  }
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 6px solid rgba(210,180,140,0.55);
+    top: 50%; left: 50%;
+    width: 165%; height: 40%;
+    transform: translate(-50%, -50%) rotateX(75deg);
+    pointer-events: none;
+  }
+
+  /* AUTH FORMS */
+  .auth-input {
+    width: 100%; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 12px 16px;
+    color: white; font-family: 'Exo 2', sans-serif; font-size: 15px;
+    outline: none; transition: border-color 0.2s;
+  }
+  .auth-input:focus { border-color: rgba(130,170,255,0.6); }
+  .auth-input::placeholder { color: rgba(255,255,255,0.35); }
+
+  /* GLOW BTN */
+  .glow-btn {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border: none; border-radius: 8px;
+    padding: 12px 28px; color: white;
+    font-family: 'Orbitron', monospace; font-size: 13px; letter-spacing: 1px;
+    cursor: pointer; transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(59,130,246,0.4);
+  }
+  .glow-btn:hover {
+    box-shadow: 0 0 35px rgba(59,130,246,0.7);
+    transform: translateY(-2px);
+  }
+
+  /* NAV */
+  .cosmic-nav {
+    background: rgba(2,8,24,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  /* PLANET PAGE BG */
+  .planet-page-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse at 20% 50%, var(--planet-glow, rgba(59,130,246,0.15)) 0%, transparent 60%),
+                var(--space-bg);
+  }
+
+  /* CATEGORY CARDS */
+  .cat-card {
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.23,1,0.32,1);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+  .cat-card:hover { transform: translateY(-8px); }
+  .cat-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent 60%);
+  }
+
+  /* MODAL */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+    z-index: 200; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: all; }
+  .modal-box {
+    background: #0d1633; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; max-width: 700px; width: 90%;
+    max-height: 80vh; overflow-y: auto;
+    transform: translateY(30px); transition: transform 0.3s;
+    scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.2) transparent;
+  }
+  .modal-backdrop.open .modal-box { transform: translateY(0); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* PLANET DETAIL BIG */
+  .planet-detail-sphere {
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+    box-shadow: inset -30px -15px 60px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .planet-detail-sphere::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 28% 22%, rgba(255,255,255,0.3), transparent 55%);
+    inset: 0;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="stars-canvas"></canvas>
+
+<!-- ===================== SIGNUP PAGE ===================== -->
+<div id="page-signup" class="page active">
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-8">
+        <div class="font-orbitron text-3xl font-black text-white mb-2">🪐 CosmosExplorer</div>
+        <p class="text-blue-300 text-sm tracking-widest uppercase">Begin Your Journey</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 36px;">
+        <h2 class="font-orbitron text-xl text-white mb-6 text-center">Create Account</h2>
+        <div id="signup-error" class="text-red-400 text-sm mb-4 hidden text-center"></div>
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs text-blue-300 uppercase tracking-wider mb-1 block">Full Name</label>
+            <input id="signup-name" type="text" placeholder="Enter your name" class="auth-input" />
+          </div>
+          <div>
+            <label class="text-xs text-blue-300 uppercase tracking-wider mb-1 block">Email Address</label>
+            <input id="signup-email" type="email" placeholder="you@example.com" class="auth-input" />
+          </div>
+          <div>
+            <label class="text-xs text-blue-300 uppercase tracking-wider mb-1 block">Password</label>
+            <input id="signup-pass" type="password" placeholder="Min 6 characters" class="auth-input" />
+          </div>
+          <button onclick="doSignup()" class="glow-btn w-full mt-2">LAUNCH INTO SPACE →</button>
+        </div>
+        <p class="text-center text-sm text-gray-400 mt-5">
+          Already have an account?
+          <button onclick="showPage('page-login')" class="text-blue-400 hover:text-blue-300 underline ml-1">Log In</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LOGIN PAGE ===================== -->
+<div id="page-login" class="page">
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-8">
+        <div class="font-orbitron text-3xl font-black text-white mb-2">🪐 CosmosExplorer</div>
+        <p class="text-blue-300 text-sm tracking-widest uppercase">Welcome Back, Astronaut</p>
+      </div>
+      <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 36px;">
+        <h2 class="font-orbitron text-xl text-white mb-6 text-center">Log In</h2>
+        <div id="login-error" class="text-red-400 text-sm mb-4 hidden text-center"></div>
+        <div class="space-y-4">
+          <div>
+            <label class="text-xs text-blue-300 uppercase tracking-wider mb-1 block">Email Address</label>
+            <input id="login-email" type="email" placeholder="you@example.com" class="auth-input" />
+          </div>
+          <div>
+            <label class="text-xs text-blue-300 uppercase tracking-wider mb-1 block">Password</label>
+            <input id="login-pass" type="password" placeholder="Your password" class="auth-input" />
+          </div>
+          <button onclick="doLogin()" class="glow-btn w-full mt-2">ENTER THE COSMOS →</button>
+        </div>
+        <p class="text-center text-sm text-gray-400 mt-5">
+          New here?
+          <button onclick="showPage('page-signup')" class="text-blue-400 hover:text-blue-300 underline ml-1">Sign Up</button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LANDING PAGE ===================== -->
+<div id="page-landing" class="page">
+
+  <!-- NAV -->
+  <nav class="cosmic-nav px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="font-orbitron text-xl font-bold text-white">🪐 CosmosExplorer</div>
+      <div class="flex items-center gap-4">
+        <span id="nav-username" class="text-blue-300 text-sm"></span>
+        <button onclick="doLogout()" class="text-gray-400 hover:text-white text-sm transition-colors border border-gray-600 rounded-lg px-4 py-2 hover:border-gray-400">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="text-center py-20 px-4 relative">
+    <div class="reveal">
+      <p class="text-blue-400 text-xs tracking-widest uppercase mb-3">Our Solar System</p>
+      <h1 class="font-orbitron text-5xl md:text-7xl font-black text-white mb-4" style="text-shadow: 0 0 60px rgba(59,130,246,0.5);">
+        EXPLORE THE<br><span class="text-transparent" style="background: linear-gradient(135deg,#60a5fa,#a78bfa,#f472b6); -webkit-background-clip:text; background-clip:text;">UNIVERSE</span>
+      </h1>
+      <p class="text-gray-400 max-w-lg mx-auto text-lg">Click on any planet to begin your cosmic journey through our solar system.</p>
+    </div>
+  </section>
+
+  <!-- PLANETS GRID -->
+  <section class="px-4 pb-10 max-w-7xl mx-auto">
+    <div id="planets-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+    </div>
+  </section>
+
+  <!-- CATEGORY SECTION -->
+  <section class="px-4 py-16 max-w-7xl mx-auto">
+    <div class="text-center mb-10 reveal">
+      <p class="text-blue-400 text-xs tracking-widest uppercase mb-2">Explore More</p>
+      <h2 class="font-orbitron text-3xl font-bold text-white">Discover Worlds Beyond</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Education Card -->
+      <div class="cat-card reveal" onclick="openModal('education')" style="background: linear-gradient(135deg, #0f2d5c, #1a1f5e); border: 1px solid rgba(59,130,246,0.3); min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🎓</div>
+        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Space Education</h3>
+        <p class="text-blue-300 text-sm mb-4">Dive into NASA missions, astronomical phenomena, and cosmic learning resources.</p>
+        <div class="flex items-center gap-2 text-blue-400 text-sm font-semibold">
+          <span>Explore →</span>
+        </div>
+      </div>
+
+      <!-- E-Commerce Card -->
+      <div class="cat-card reveal" onclick="openModal('ecommerce')" style="background: linear-gradient(135deg, #2d1a0e, #1a0d2e); border: 1px solid rgba(251,146,60,0.3); min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🛸</div>
+        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Space Commerce</h3>
+        <p class="text-orange-300 text-sm mb-4">Shop telescopes, star maps, astronaut gear, and out-of-this-world merchandise.</p>
+        <div class="flex items-center gap-2 text-orange-400 text-sm font-semibold">
+          <span>Shop Now →</span>
+        </div>
+      </div>
+
+      <!-- Sports Card -->
+      <div class="cat-card reveal" onclick="openModal('sports')" style="background: linear-gradient(135deg, #0d2e1a, #0d2e0d); border: 1px solid rgba(74,222,128,0.3); min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🏆</div>
+        <h3 class="font-orbitron text-xl font-bold text-white mb-2">Zero-G Sports</h3>
+        <p class="text-green-300 text-sm mb-4">Future sports in space: lunar Olympics, orbital racing, and zero-gravity athletics.</p>
+        <div class="flex items-center gap-2 text-green-400 text-sm font-semibold">
+          <span>Play On →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="text-center py-8 text-gray-600 text-sm border-t border-gray-800">
+    <p class="font-orbitron">CosmosExplorer © 2025 — Navigate The Universe</p>
+  </footer>
+</div>
+
+<!-- ===================== PLANET DETAIL PAGE ===================== -->
+<div id="page-planet" class="page">
+  <div class="planet-page-bg" id="planet-bg"></div>
+
+  <!-- NAV -->
+  <nav class="cosmic-nav px-6 py-4 relative z-10">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <button onclick="showPage('page-landing')" class="flex items-center gap-2 text-blue-400 hover:text-white transition-colors">
+        <span class="text-xl">←</span>
+        <span class="font-orbitron text-sm">Back to Solar System</span>
+      </button>
+      <span id="nav-username-planet" class="text-blue-300 text-sm"></span>
+    </div>
+  </nav>
+
+  <div id="planet-content" class="max-w-6xl mx-auto px-4 py-12 relative z-10"></div>
+</div>
+
+<!-- ===================== CATEGORY MODAL ===================== -->
+<div id="modal" class="modal-backdrop" onclick="closeModal(event)">
+  <div class="modal-box p-8">
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+
+<script>
+// ===================== STARS =====================
+const canvas = document.getElementById('stars-canvas');
+const ctx = canvas.getContext('2d');
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; drawStars(); }
+function drawStars() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<250;i++){
+    const x=Math.random()*canvas.width, y=Math.random()*canvas.height;
+    const r=Math.random()*1.5;
+    const op=Math.random()*0.8+0.2;
+    ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,255,${op})`; ctx.fill();
+  }
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// ===================== PLANETS DATA =====================
+const PLANETS = [
+  {
+    id:'mercury', name:'Mercury', color:'#b5b5b5',
+    glow:'rgba(181,181,181,0.25)',
+    size:70, noRing:true,
+    gradient:'radial-gradient(circle at 35% 30%, #d4d4d4, #8c8c8c, #5a5a5a)',
+    tagline:'The Swift Messenger',
+    facts:['Closest planet to the Sun','Year = 88 Earth days','Surface temp: -180°C to 430°C','No atmosphere, heavily cratered'],
+    description:`Mercury is the smallest planet in our solar system and the closest to the Sun. Despite being so close to the Sun, it is not the hottest planet — that title belongs to Venus. Mercury has virtually no atmosphere to retain heat, resulting in extreme temperature swings. A day on Mercury lasts 59 Earth days while its year is only 88 Earth days.`,
+    fun:'If you weighed 60kg on Earth, you would weigh only 23kg on Mercury!',
+    moons:0, distanceAU:'0.39', diameterKm:'4,879'
+  },
+  {
+    id:'venus', name:'Venus', color:'#e8c97a',
+    glow:'rgba(232,201,122,0.3)',
+    size:90, noRing:true,
+    gradient:'radial-gradient(circle at 30% 28%, #f5dfa0, #d4a843, #8b6914)',
+    tagline:'The Scorching Twin',
+    facts:['Hottest planet at 465°C average','Rotates backwards (retrograde)','A Venus day > A Venus year','Covered in thick CO₂ clouds'],
+    description:`Venus is Earth's closest planetary neighbor and similar in size, earning it the nickname "Earth's twin." However, its thick atmosphere of carbon dioxide creates a runaway greenhouse effect, making it the hottest planet in the solar system. The atmospheric pressure on Venus is 92 times that of Earth — equivalent to being 900 meters underwater!`,
+    fun:'Venus spins so slowly that a day on Venus is longer than its year!',
+    moons:0, distanceAU:'0.72', diameterKm:'12,104'
+  },
+  {
+    id:'earth', name:'Earth', color:'#4fa3e0',
+    glow:'rgba(79,163,224,0.3)',
+    size:92, noRing:true,
+    gradient:'radial-gradient(circle at 30% 28%, #7ecef4, #2e86ab, #1a5276)',
+    tagline:'Our Blue Home',
+    facts:['Only known planet with life','71% surface covered by water','One natural moon','Magnetic field protects us'],
+    description:`Earth is the third planet from the Sun and the only astronomical object known to harbor life. About 71% of Earth's surface is covered by water. Earth's atmosphere, consisting of nitrogen, oxygen, and other gases, protects life from solar radiation and regulates temperature. Earth is approximately 4.5 billion years old.`,
+    fun:'Earth is the densest planet in the solar system!',
+    moons:1, distanceAU:'1.00', diameterKm:'12,742'
+  },
+  {
+    id:'mars', name:'Mars', color:'#c1440e',
+    glow:'rgba(193,68,14,0.35)',
+    size:78, noRing:true,
+    gradient:'radial-gradient(circle at 35% 30%, #e06530, #c1440e, #7a2a08)',
+    tagline:'The Red Planet',
+    facts:['Home of Olympus Mons — tallest volcano','Thin CO₂ atmosphere','Two small moons: Phobos & Deimos','NASA rovers actively exploring'],
+    description:`Mars is the fourth planet from the Sun and the second-smallest planet. Often called the "Red Planet" due to iron oxide on its surface, Mars has the largest volcano in the solar system — Olympus Mons — standing 22 km tall. Mars also features Valles Marineris, a canyon system stretching 4,000 km. Scientists believe Mars once had liquid water.`,
+    fun:'A Martian day (sol) is 24 hours and 37 minutes — almost identical to Earth!',
+    moons:2, distanceAU:'1.52', diameterKm:'6,779'
+  },
+  {
+    id:'jupiter', name:'Jupiter', color:'#c88b4d',
+    glow:'rgba(200,139,77,0.3)',
+    size:130, noRing:false,
+    gradient:'radial-gradient(circle at 35% 30%, #e8c88e, #c88b4d, #7a5028)',
+    tagline:'The Giant King',
+    facts:['Largest planet in solar system','Great Red Spot — 400-year storm','95 known moons including Ganymede','Fastest rotation: 10-hour day'],
+    description:`Jupiter is the fifth planet from the Sun and the largest in the solar system. It is a gas giant with a mass greater than all other planets combined. Jupiter's most iconic feature is the Great Red Spot — a storm larger than Earth that has raged for centuries. Jupiter has a faint ring system and at least 95 moons, including the four large Galilean moons: Io, Europa, Ganymede, and Callisto.`,
+    fun:'Jupiter\'s moon Europa may harbor a liquid ocean beneath its icy surface, making it a candidate for extraterrestrial life!',
+    moons:95, distanceAU:'5.20', diameterKm:'139,820'
+  },
+  {
+    id:'saturn', name:'Saturn', color:'#e4d191',
+    glow:'rgba(228,209,145,0.3)',
+    size:110, noRing:false,
+    gradient:'radial-gradient(circle at 35% 30%, #f5e9b0, #d4b44a, #8c7530)',
+    tagline:'The Ringed Wonder',
+    facts:['Most spectacular ring system','Least dense planet — floats on water!','82 moons including Titan','Titan has a thick nitrogen atmosphere'],
+    description:`Saturn is the sixth planet from the Sun and the second-largest in the solar system. It is famous for its extensive ring system made of ice and rock particles. Saturn is the least dense planet — it would float in water if you had a big enough ocean! Its moon Titan is larger than Mercury and has a thick atmosphere with liquid methane lakes on its surface.`,
+    fun:'Saturn\'s rings are incredibly thin — only about 10 meters thick despite being 282,000 km wide!',
+    moons:82, distanceAU:'9.58', diameterKm:'116,460'
+  },
+  {
+    id:'uranus', name:'Uranus', color:'#7de8e8',
+    glow:'rgba(125,232,232,0.3)',
+    size:100, noRing:false,
+    gradient:'radial-gradient(circle at 30% 28%, #aff5f5, #5cc8c8, #2a8a8a)',
+    tagline:'The Tilted Ice Giant',
+    facts:['Tilted 98° on its axis (rotates sideways)','Made of icy fluids: water, ammonia, methane','27 known moons','Faint ring system (13 rings)'],
+    description:`Uranus is the seventh planet from the Sun and the third-largest in the solar system by diameter. It is classified as an "ice giant" due to its composition of icy materials. Uranus is unique because it rotates on its side with an axial tilt of 98 degrees — possibly caused by a massive collision long ago. This means its poles experience 42 years of sunlight followed by 42 years of darkness.`,
+    fun:'Uranus was the first planet discovered using a telescope, by William Herschel in 1781!',
+    moons:27, distanceAU:'19.2', diameterKm:'50,724'
+  },
+  {
+    id:'neptune', name:'Neptune', color:'#4169e1',
+    glow:'rgba(65,105,225,0.4)',
+    size:95, noRing:false,
+    gradient:'radial-gradient(circle at 30% 28%, #7090f5, #2550c8, #0a2580)',
+    tagline:'The Windswept Mystic',
+    facts:['Strongest winds: 2,100 km/h','Takes 165 years to orbit the Sun','The Great Dark Spot (massive storm)','14 moons including Triton'],
+    description:`Neptune is the eighth and farthest planet from the Sun in the solar system. It is an ice giant with the strongest winds of any planet — reaching over 2,100 km/h. Neptune was the first planet to be predicted mathematically before being observed. It takes 165 Earth years to complete one orbit around the Sun. Neptune's largest moon, Triton, orbits in the opposite direction to the planet's rotation.`,
+    fun:'Neptune was discovered in 1846 — and has completed less than one full orbit since then!',
+    moons:14, distanceAU:'30.1', diameterKm:'49,244'
+  }
+];
+
+// ===================== AUTH =====================
+function doSignup() {
+  const name = document.getElementById('signup-name').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const pass = document.getElementById('signup-pass').value;
+  const errEl = document.getElementById('signup-error');
+  if(!name || !email || !pass) { showErr(errEl,'Please fill in all fields.'); return; }
+  if(pass.length < 6) { showErr(errEl,'Password must be at least 6 characters.'); return; }
+  const users = JSON.parse(localStorage.getItem('cosmos_users')||'{}');
+  if(users[email]) { showErr(errEl,'Email already registered. Please log in.'); return; }
+  users[email] = { name, email, pass };
+  localStorage.setItem('cosmos_users', JSON.stringify(users));
+  loginUser({ name, email });
+}
+function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  const errEl = document.getElementById('login-error');
+  const users = JSON.parse(localStorage.getItem('cosmos_users')||'{}');
+  if(!users[email] || users[email].pass !== pass) { showErr(errEl,'Invalid email or password.'); return; }
+  loginUser(users[email]);
+}
+function loginUser(user) {
+  localStorage.setItem('cosmos_session', JSON.stringify(user));
+  document.getElementById('nav-username').textContent = `👨‍🚀 ${user.name}`;
+  document.getElementById('nav-username-planet').textContent = `👨‍🚀 ${user.name}`;
+  showPage('page-landing');
+  renderPlanets();
+  initReveal();
+}
+function doLogout() {
+  localStorage.removeItem('cosmos_session');
+  showPage('page-signup');
+}
+function showErr(el, msg) { el.textContent = msg; el.classList.remove('hidden'); }
+
+// ===================== PAGES =====================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ===================== RENDER PLANETS =====================
+function renderPlanets() {
+  const grid = document.getElementById('planets-grid');
+  grid.innerHTML = '';
+  PLANETS.forEach((p,i) => {
+    const card = document.createElement('div');
+    card.className = 'planet-card reveal';
+    card.style.cssText = `background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 24px; text-align: center; animation-delay: ${i*0.08}s`;
+    const sphereWrapper = p.id === 'saturn' || p.id === 'uranus' || p.id === 'neptune' || p.id === 'jupiter'
+      ? `<div class="ring-wrapper" style="display:inline-block;position:relative;margin-bottom:16px;">
+           <div class="planet-sphere" style="width:${p.size}px;height:${p.size}px;background:${p.gradient};display:inline-block;"></div>
+           <div class="ring" style="border-color: rgba(${p.id==='saturn'?'210,180,140':'130,200,210'},0.5);"></div>
+         </div>`
+      : `<div class="planet-sphere" style="width:${p.size}px;height:${p.size}px;background:${p.gradient};display:inline-block;margin-bottom:16px;"></div>`;
+    card.innerHTML = `
+      ${sphereWrapper}
+      <h3 class="font-orbitron text-base font-bold text-white mb-1">${p.name}</h3>
+      <p class="text-xs text-gray-400">${p.tagline}</p>
+    `;
+    card.onclick = () => showPlanet(p.id);
+    grid.appendChild(card);
+  });
+  setTimeout(initReveal, 50);
+}
+
+// ===================== PLANET DETAIL =====================
+function showPlanet(id) {
+  const p = PLANETS.find(x => x.id === id);
+  if(!p) return;
+
+  const bg = document.getElementById('planet-bg');
+  bg.style.background = `radial-gradient(ellipse at 20% 50%, ${p.glow} 0%, transparent 60%), var(--space-bg)`;
+
+  const ringHtml = (p.id==='saturn'||p.id==='uranus'||p.id==='neptune'||p.id==='jupiter')
+    ? `<div class="ring" style="width:200%;height:40%;border-color:rgba(${p.id==='saturn'?'210,180,140':'130,200,210'},0.55);"></div>` : '';
+
+  document.getElementById('planet-content').innerHTML = `
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="text-center">
+        <div class="ring-wrapper" style="display:inline-block;position:relative;">
+          <div class="planet-detail-sphere" style="width:220px;height:220px;background:${p.gradient};display:inline-block;"></div>
+          ${ringHtml}
+        </div>
+      </div>
+      <div>
+        <p class="text-xs tracking-widest uppercase mb-2" style="color:${p.color}">PLANET ${PLANETS.indexOf(p)+1} OF 8</p>
+        <h1 class="font-orbitron text-5xl font-black text-white mb-1">${p.name}</h1>
+        <p class="text-lg mb-6" style="color:${p.color}">${p.tagline}</p>
+
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;text-align:center;">
+            <div class="text-xs text-gray-400 mb-1">Distance (AU)</div>
+            <div class="font-orbitron text-base font-bold text-white">${p.distanceAU}</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;text-align:center;">
+            <div class="text-xs text-gray-400 mb-1">Diameter (km)</div>
+            <div class="font-orbitron text-base font-bold text-white">${p.diameterKm}</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:14px;text-align:center;">
+            <div class="text-xs text-gray-400 mb-1">Moons</div>
+            <div class="font-orbitron text-base font-bold text-white">${p.moons}</div>
+          </div>
+        </div>
+
+        <p class="text-gray-300 leading-relaxed mb-6">${p.description}</p>
+
+        <div style="border-left:3px solid ${p.color};padding-left:16px;margin-bottom:20px;">
+          <p class="text-xs text-gray-400 mb-1 uppercase tracking-wider">Fun Fact</p>
+          <p class="text-white text-sm">${p.fun}</p>
+        </div>
+
+        <div>
+          <p class="text-xs text-gray-400 uppercase tracking-wider mb-3">Key Facts</p>
+          <ul class="space-y-2">
+            ${p.facts.map(f=>`<li class="flex items-center gap-2 text-sm text-gray-300"><span style="color:${p.color}">◆</span>${f}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER PLANETS -->
+    <div class="mt-16">
+      <h3 class="font-orbitron text-xl text-white mb-6 text-center">Explore Other Planets</h3>
+      <div class="grid grid-cols-4 md:grid-cols-8 gap-3">
+        ${PLANETS.map(op=>`
+          <div onclick="showPlanet('${op.id}')" style="cursor:pointer;text-align:center;padding:12px 6px;border-radius:12px;background:${op.id===id?'rgba(255,255,255,0.1)':'rgba(255,255,255,0.03)'};border:1px solid rgba(255,255,255,${op.id===id?'0.2':'0.06'});transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.background='${op.id===id?'rgba(255,255,255,0.1)':'rgba(255,255,255,0.03)'}'">
+            <div style="width:36px;height:36px;border-radius:50%;background:${op.gradient};margin:0 auto 6px;"></div>
+            <div class="font-orbitron text-white" style="font-size:10px;">${op.name}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  showPage('page-planet');
+}
+
+// ===================== MODAL CONTENT =====================
+const MODAL_CONTENT = {
+  education: {
+    title: '🎓 Space Education Hub',
+    color: '#60a5fa',
+    html: `
+      <h2 class="font-orbitron text-2xl text-white mb-2">Space Education Hub</h2>
+      <p class="text-blue-300 mb-6 text-sm">Expand your cosmic knowledge</p>
+      <div class="grid gap-4">
+        ${[
+          {icon:'🔭',t:'Astronomy 101',d:'Learn about stars, galaxies, black holes, and the origins of the universe.',tag:'Beginner'},
+          {icon:'🚀',t:'NASA Missions',d:'Follow active missions: Artemis, James Webb Space Telescope, Mars Perseverance rover, and more.',tag:'Intermediate'},
+          {icon:'🌌',t:'Astrophysics Deep Dive',d:'Explore dark matter, gravitational waves, neutron stars and the laws governing the cosmos.',tag:'Advanced'},
+          {icon:'📡',t:'Space Technology',d:'Satellites, space stations, rocket propulsion, and future colonization plans.',tag:'All Levels'},
+          {icon:'🌍',t:'Earth & Climate Science',d:'How space observation helps us understand and protect our home planet.',tag:'Popular'},
+        ].map(c=>`
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;display:flex;gap:12px;align-items:flex-start;">
+            <span style="font-size:1.8rem;">${c.icon}</span>
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-orbitron text-white text-sm font-bold">${c.t}</h4>
+                <span style="background:rgba(96,165,250,0.2);color:#93c5fd;font-size:10px;padding:2px 8px;border-radius:20px;">${c.tag}</span>
+              </div>
+              <p class="text-gray-400 text-sm">${c.d}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `
+  },
+  ecommerce: {
+    title: '🛸 Space Commerce Store',
+    color: '#fb923c',
+    html: `
+      <h2 class="font-orbitron text-2xl text-white mb-2">Space Commerce Store</h2>
+      <p class="text-orange-300 mb-6 text-sm">Out-of-this-world shopping</p>
+      <div class="grid grid-cols-2 gap-4">
+        ${[
+          {icon:'🔭',t:'Telescopes',p:'₹8,999',d:'Celestron 70mm refractor for beginners'},
+          {icon:'🗺️',t:'Star Maps',p:'₹499',d:'Personalized sky maps of any date & location'},
+          {icon:'👨‍🚀',t:'Astronaut Gear',p:'₹2,499',d:'NASA-style space suit replicas & helmets'},
+          {icon:'🪨',t:'Meteorite',p:'₹3,299',d:'Authentic iron meteorite specimen, certified'},
+          {icon:'📚',t:'Space Books',p:'₹799',d:'Cosmos by Carl Sagan — bestselling classic'},
+          {icon:'🌠',t:'Star Kit',p:'₹1,299',d:'Adopt-a-star certificate with coordinates'},
+        ].map(c=>`
+          <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:16px;position:relative;">
+            <span style="font-size:2rem;">${c.icon}</span>
+            <h4 class="font-orbitron text-white text-sm font-bold mt-2 mb-1">${c.t}</h4>
+            <p class="text-gray-400 text-xs mb-3">${c.d}</p>
+            <div class="flex items-center justify-between">
+              <span style="color:#fb923c;font-weight:600;">${c.p}</span>
+              <button style="background:rgba(251,146,60,0.2);color:#fb923c;border:1px solid rgba(251,146,60,0.4);border-radius:8px;padding:4px 12px;font-size:11px;cursor:pointer;font-family:'Orbitron',monospace;">ADD</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `
+  },
+  sports: {
+    title: '🏆 Zero-G Sports Arena',
+    color: '#4ade80',
+    html: `
+      <h2 class="font-orbitron text-2xl text-white mb-2">Zero-G Sports Arena</h2>
+      <p class="text-green-300 mb-6 text-sm">The future of sports is in space</p>
+      <div class="space-y-4">
+        ${[
+          {icon:'🌙',t:'Lunar Olympics 2040',d:'Planned athletic events on the lunar surface. 1/6th gravity means 6x higher jumps!',status:'Coming Soon',sc:'#4ade80'},
+          {icon:'🏎️',t:'Orbital Racing League',d:'High-speed spacecraft racing around orbital tracks. Teams compete for the Cosmos Cup.',status:'Season 3 Live',sc:'#fb923c'},
+          {icon:'🤸',t:'Zero-Gravity Gymnastics',d:'Acrobatics in microgravity aboard the International Space Station exhibitions.',status:'Streaming Now',sc:'#60a5fa'},
+          {icon:'⚽',t:'Micro-Gravity Football',d:'Experimental football played in pressurized domes on Mars colonies. First match: 2038.',status:'Upcoming',sc:'#c084fc'},
+          {icon:'🏊',t:'Space Swimming',d:'Swimming in spherical water bubbles floating in orbital stations — entirely new technique!',status:'Training Phase',sc:'#2dd4bf'},
+        ].map(c=>`
+          <div style="background:rgba(255,255,255,0.04);border-radius:12px;padding:16px;display:flex;gap:12px;align-items:center;border:1px solid rgba(255,255,255,0.07);">
+            <span style="font-size:2rem;flex-shrink:0;">${c.icon}</span>
+            <div style="flex:1;">
+              <div class="flex items-center gap-2 flex-wrap mb-1">
+                <h4 class="font-orbitron text-white text-sm font-bold">${c.t}</h4>
+                <span style="background:rgba(255,255,255,0.08);color:${c.sc};font-size:10px;padding:2px 8px;border-radius:20px;">${c.status}</span>
+              </div>
+              <p class="text-gray-400 text-sm">${c.d}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `
+  }
+};
+
+function openModal(type) {
+  const c = MODAL_CONTENT[type];
+  document.getElementById('modal-content').innerHTML = `
+    <div class="flex justify-between items-start mb-4">
+      <div></div>
+      <button onclick="closeModal()" style="color:rgba(255,255,255,0.5);font-size:22px;background:none;border:none;cursor:pointer;line-height:1;">✕</button>
+    </div>
+    ${c.html}
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(e) {
+  if(!e || e.target === document.getElementById('modal') || e.currentTarget === document.getElementById('modal') && e.target.tagName==='BUTTON') {
+    document.getElementById('modal').classList.remove('open');
+  }
+}
+
+// ===================== SCROLL REVEAL =====================
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+}
+
+// ===================== INIT =====================
+(function init() {
+  const session = localStorage.getItem('cosmos_session');
+  if(session) {
+    const user = JSON.parse(session);
+    document.getElementById('nav-username').textContent = `👨‍🚀 ${user.name}`;
+    document.getElementById('nav-username-planet').textContent = `👨‍🚀 ${user.name}`;
+    showPage('page-landing');
+    renderPlanets();
+    initReveal();
+  }
+})();
+</script>
+</body>
+</html>
