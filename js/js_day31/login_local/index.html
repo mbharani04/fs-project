@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auth App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+  <!-- AUTH CARD -->
+  <div id="authBox" class="bg-white p-6 rounded-xl shadow-md w-80">
+    <h2 id="title" class="text-2xl font-bold text-center mb-4">Register</h2>
+
+    <!-- Name (only for register) -->
+    <input id="name" placeholder="Name"
+      class="w-full border p-2 mb-3 rounded" />
+
+    <input id="email" placeholder="Email"
+      class="w-full border p-2 mb-3 rounded" />
+
+    <input id="password" type="password" placeholder="Password"
+      class="w-full border p-2 mb-3 rounded" />
+
+    <button id="actionBtn"
+      class="w-full bg-blue-500 text-white p-2 rounded mb-3">
+      Register
+    </button>
+
+    <p class="text-center text-sm">
+      <span id="toggleText">Already have account?</span>
+      <button onclick="toggleMode()" class="text-blue-500" id="toggleBtn">
+        Login
+      </button>
+    </p>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="dashboard" class="hidden w-full h-screen bg-gray-100">
+    <div class="flex justify-between items-center p-4 bg-white shadow">
+      <h1 class="text-xl font-bold">Dashboard</h1>
+      <button onclick="logout()" class="bg-red-500 text-white px-4 py-2 rounded">
+        Logout
+      </button>
+    </div>
+
+    <div class="p-6">
+      <h2 id="welcome" class="text-2xl font-semibold"></h2>
+    </div>
+  </div>
+
+<script>
+let isLogin = false;
+
+// Toggle Register/Login
+function toggleMode() {
+  isLogin = !isLogin;
+
+  document.getElementById("title").innerText = isLogin ? "Login" : "Register";
+  document.getElementById("actionBtn").innerText = isLogin ? "Login" : "Register";
+  document.getElementById("toggleText").innerText = isLogin
+    ? "Don't have account?"
+    : "Already have account?";
+  document.getElementById("toggleBtn").innerText = isLogin ? "Register" : "Login";
+
+  // Hide name field in login
+  document.getElementById("name").style.display = isLogin ? "none" : "block";
+}
+
+// Main button action
+document.getElementById("actionBtn").onclick = function () {
+  isLogin ? login() : register();
+};
+
+// Register
+function register() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const exists = users.find(u => u.email === email);
+  if (exists) {
+    alert("User already exists!");
+    return;
+  }
+
+  users.push({ name, email, password });
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Registered Successfully!");
+  toggleMode();
+}
+
+// Login
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  const user = users.find(u => u.email === email && u.password === password);
+
+  if (!user) {
+    alert("Invalid credentials!");
+    return;
+  }
+
+  localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+  showDashboard(user);
+}
+
+// Show Dashboard
+function showDashboard(user) {
+  document.getElementById("authBox").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  document.getElementById("welcome").innerText = "Welcome, " + user.name;
+}
+
+// Logout
+function logout() {
+  localStorage.removeItem("loggedInUser");
+  location.reload();
+}
+
+// Auto login if already logged in
+const savedUser = JSON.parse(localStorage.getItem("loggedInUser"));
+if (savedUser) {
+  showDashboard(savedUser);
+}
+</script>
+
+</body>
+</html>
