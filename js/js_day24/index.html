@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning javascript</title>
+</head>
+<body>
+<script>
+ let arrAdd = [10,20,30];
+ arrAdd.push(40);
+ console.log("1. arrAdd:", arrAdd);
+
+let arrRemove = [10, 20, 30, 40];
+let removed = arrRemove.pop();
+console.log(" Removed element:", removed);
+console.log("2. arrRemove:", arrRemove);    
+
+let arrUnshift = [20, 30];
+arrUnshift.unshift(10);
+console.log("3. arrUnshift:", arrUnshift);
+
+let arrShift = [10, 20, 30];
+arrShift.shift();
+console.log("4. arrShift:", arrShift); 
+
+let arr = [1, 2, 3, 4];
+let result = arr.map(num => num * 2);
+console.log("5. Mapped array:", result); 
+
+let arrEven = [1, 2, 3, 4, 5, 6];
+let even = arrEven.filter(num => num % 2 === 0);
+console.log("6. Even numbers:", even);
+
+let arrGre = [5, 10, 15, 20];
+let value = arrGre.find(num => num > 10);
+console.log("7. greater than 10:", value); 
+
+let arrExists = [10, 20, 30];
+let exists = arrExists.includes(20);
+console.log("8. Exists:", exists); 
+
+let arr9 = [10, 20, 30, 40];
+for (let i = 0; i < arr9.length; i++) {
+  console.log("9. Element:", arr9[i]);
+}
+
+
+let numbersArray = [10, 20, 30, 40];
+for (let i = 0; i < numbersArray.length; i++) {
+  console.log("Q9:", numbersArray[i]);
+}
+
+
+let sumArray = [10, 20, 30];
+let totalSum = 0;
+for (let i = 0; i < sumArray.length; i++) {
+  totalSum += sumArray[i];
+}
+console.log("Q10:", totalSum);
+
+
+let evenCheckArray = [1, 2, 3, 4, 5, 6];
+let evenCount = 0;
+for (let i = 0; i < evenCheckArray.length; i++) {
+  if (evenCheckArray[i] % 2 === 0) {
+    evenCount++;
+  }
+}
+console.log("Q11:", evenCount);
+
+
+let largestArray = [10, 50, 20, 80];
+let largestValue = largestArray[0];
+for (let i = 1; i < largestArray.length; i++) {
+  if (largestArray[i] > largestValue) {
+    largestValue = largestArray[i];
+  }
+}
+console.log("Q12:", largestValue);
+
+let reverseArray = [10, 20, 30];
+for (let i = 0; i < reverseArray.length / 2; i++) {
+  let tempValue = reverseArray[i];
+  reverseArray[i] = reverseArray[reverseArray.length - 1 - i];
+  reverseArray[reverseArray.length - 1 - i] = tempValue;
+}
+console.log("Q13:", reverseArray);
+
+
+let oddCheckArray = [1, 2, 3, 4, 5];
+
+for (let i = 0; i < oddCheckArray.length; i++) {
+  if (oddCheckArray[i] % 2 !== 0) {
+    console.log("Q14:", oddCheckArray[i]);
+  }
+}
+
+
+let greaterCheckArray = [5, 15, 25, 3];
+let greaterCount = 0;
+for (let i = 0; i < greaterCheckArray.length; i++) {
+  if (greaterCheckArray[i] > 10) {
+    greaterCount++;
+  }
+}
+console.log("Q15:", greaterCount);
+
+</script>
+
+</body>
+</html>

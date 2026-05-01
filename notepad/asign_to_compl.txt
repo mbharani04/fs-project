@@ -1,5 +1,5 @@
 
-1. js_day24 : i changed folder name according to sla portal day number
+
 2. js_day31 - not started
 3. js_day32: interview upload  git link but not finish
 4. js_day36: not started
