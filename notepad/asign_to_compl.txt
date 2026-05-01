@@ -1,82 +1,49 @@
 
-js_day24 : i changed folder name according to sla portal day number
-
-Task
-🧩 Task 1 — useMemo (Sorting Numbers)
-
-👉 Create:
-
-array of random numbers
-
-👉 Task:
-
-sort the array (ascending) using loop or built-in
-
-use useMemo
-
-👉 Add:
-
-button → generate new array
-
-button → toggle theme
-
-👉 Condition:
-
-sorting should run only when array changes
-
-🧩 Task 2 — useMemo (Search Filter)
-👉 Create:
-
-list of 5000 names
-
-👉 Task:
-
-filter names based on search input
-
-use useMemo
-
-👉 Add:
-
-input field → search
-
-button → toggle theme
-
-👉 Condition:
-
-filtering should NOT run on theme change
-
-🧩 Task 3 — useCallback (Event Handler Optimization)
-👉 Create:
-
-parent + child component
-
-👉 Task:
-
-pass a function to child
-
-function should calculate square of a number with loop
-
-👉 Use:
-
-useCallback
-
-wrap child with React.memo
-
-👉 Add:
-
-button → change theme
-
-👉 Condition:
-
-child should NOT re-render on theme change
+1. js_day24 : i changed folder name according to sla portal day number
+2. js_day31 - not started
+3. js_day32: interview upload  git link but not finish
+4. js_day36: not started
+5. js_day38: not started
+6. Day 40 - useEffect Hook (basic usage, dependencies)   not started
+7. Day 41 - React Router DOM: Installation, BrowserRouter, Routes, Route, Link
+8. Day 42 - UI Styling: Tailwind CSS basics, usage in React
+9. Day 43 - Styling with MUI (Material UI), basic components
 
 
-js_30 and js_32
 
 
-react 
+10.  SPL Class - Test - 18-04-2026 finish but not uploaded in git
+11. Test (25-04-2026) - not started
 
-day35, 38, 37upload that pdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

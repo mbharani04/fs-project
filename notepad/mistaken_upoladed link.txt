@@ -1,0 +1,7 @@
+js_day27 link changed erase only-->logical.html its them it shows correct answer as it give in task 
+
+
+missed task:
+Day - 18 - Tailwind CSS Basics And usability
+js_day30 [ Day 30 - Async Await Process]
+js_day39 - Forms handling in React (controlled components)
