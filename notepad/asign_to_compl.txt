@@ -1,9 +1,7 @@
 
 
 
-3. js_day32: interview upload  git link but not finish
-4. js_day36: not started
-5. js_day38: not started
+3. js_day32: interview upload  git link but not finish5. js_day38: not started
 6. Day 40 - useEffect Hook (basic usage, dependencies)   not started
 7. Day 41 - React Router DOM: Installation, BrowserRouter, Routes, Route, Link
 8. Day 42 - UI Styling: Tailwind CSS basics, usage in React
@@ -14,6 +12,10 @@
 
 
 11. Test (25-04-2026) - not started
+
+
+react:38
+interview documents
 
 
 
