@@ -1,0 +1,8 @@
+
+
+port: 3306
+
+pipe: MQSQL
+
+user name: admin
+password: admin

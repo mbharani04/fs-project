@@ -5,7 +5,7 @@
 6. Day 40 - useEffect Hook (basic usage, dependencies)   not started
 7. Day 41 - React Router DOM: Installation, BrowserRouter, Routes, Route, Link
 8. Day 42 - UI Styling: Tailwind CSS basics, usage in React
-9. Day 43 - Styling with MUI (Material UI), basic components
+
 
 
 
