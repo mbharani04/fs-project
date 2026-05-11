@@ -16,24 +16,6 @@ export const servicesData = [
     availability: "24/7 Active"
   },
   {
-    id: 2,
-    title: "Upload Photo Evidence",
-    description: "Attach clear photographic evidence of public issues like road damage or garbage.",
-    icon: Camera,
-    rating: 4.7,
-    reviews: 8932,
-    availability: "24/7 Active"
-  },
-  {
-    id: 3,
-    title: "Upload Video Evidence",
-    description: "Upload short video clips to provide better context for complex complaints.",
-    icon: Video,
-    rating: 4.5,
-    reviews: 5621,
-    availability: "Max 50MB"
-  },
-  {
     id: 4,
     title: "Government Scheme Info",
     description: "Access detailed information about latest welfare schemes and eligibility.",
@@ -106,15 +88,6 @@ export const servicesData = [
     availability: "Real-time"
   },
   {
-    id: 12,
-    title: "Real-time Tracking",
-    description: "Track the live status of your submitted complaints and officer remarks.",
-    icon: Activity,
-    rating: 4.6,
-    reviews: 12345,
-    availability: "Live Updates"
-  },
-  {
     id: 13,
     title: "Emergency Public Support",
     description: "Direct contact lines for immediate disaster relief or emergency response.",
@@ -132,13 +105,5 @@ export const servicesData = [
     reviews: 65432,
     availability: "Encrypted"
   },
-  {
-    id: 15,
-    title: "OTP Verified System",
-    description: "Two-factor authentication for safe and verified complaint registration.",
-    icon: Key,
-    rating: 4.8,
-    reviews: 32145,
-    availability: "Required"
-  }
+
 ];

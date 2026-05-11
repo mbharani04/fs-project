@@ -8,18 +8,19 @@ const ServicesSection = () => {
 
   return (
     <section className="py-20 bg-white" id="services">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-            <div className="w-20 h-1.5 bg-primary-600 rounded-full mb-4"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  ">
+        <div className="flex flex-col md:flex-row justify-center items-center mb-12">
+          <div className="text-center flex flex-col items-center justify-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold  text-gray-900 mb-4">Our Services</h2>
+            <div className="w-20 h-1.5 bg-primary-600 mx-auto rounded-full"></div>
             <p className="text-gray-600 max-w-2xl">
               A comprehensive suite of digital services designed to make your interaction with government departments seamless, secure, and transparent.
             </p>
+            <a href="/services" className="inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 mt-6">
+              View All Services &rarr;
+            </a>
           </div>
-          <a href="/services" className="hidden md:inline-flex items-center text-primary-600 font-semibold hover:text-primary-700 mt-4 md:mt-0">
-            View All Services &rarr;
-          </a>
+         
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

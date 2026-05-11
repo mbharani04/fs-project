@@ -3,22 +3,24 @@ import { Target, Eye, Shield, Users } from 'lucide-react';
 
 const AboutSection = () => {
   return (
-    <section className="py-20 bg-gray-50" id="about">
+    <section className="py-3 bg-gray-80" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About PublicService Portal</h2>
           <div className="w-20 h-1.5 bg-primary-600 mx-auto rounded-full"></div>
         </div>
-
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-5  items-center mb-16">
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Bridging the Gap Between Citizens and Government</h3>
-            <div className="space-y-4 text-gray-600 text-lg leading-relaxed">
+            <div className="space-y-2 text-gray-600 text-lg leading-relaxed">
               <p>
-                This platform was created to help citizens raise complaints easily and safely to the concerned government departments. Many public issues such as road damage, water problems, electricity issues, and farmer-related concerns are often delayed due to lack of communication and transparency.
+                Our platform was created to bridge the gap between citizens and government authorities by providing a safe, simple, and transparent way for people
+                to raise complaints and access important public services. Many public issues such as road damage, water supply problems, electricity failures, women’s safety concerns, farmer-related issues, education support, scholarship assistance, medical fund requests, 
+                and social service donations are often delayed because of poor communication and lack of transparency. This website helps citizens directly connect with the concerned government departments for faster response and better accountability.
               </p>
               <p>
-                This website acts as a bridge between the public and government authorities by providing a secure and trusted online complaint system. The main goal is to ensure immediate attention and faster action from responsible departments.
+              In addition to complaint management, the platform also supports government-related services such as applying for forms, correcting errors in government IDs like Aadhaar, PAN, voter ID, ration card, and driving license details through an easy online process.
+              Our main goal is to ensure quick attention, secure communication, transparency, and efficient action from responsible authorities while building trust between the public and the government.  
               </p>
             </div>
           </div>

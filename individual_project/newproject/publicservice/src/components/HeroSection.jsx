@@ -25,10 +25,6 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animate-delay-300">
-          <Link to="/reports" className="w-full sm:w-auto btn-primary px-8 py-3.5 text-base">
-            <FileText className="w-5 h-5 mr-2" />
-            Register Complaint
-          </Link>
           <Link to="/services" className="w-full sm:w-auto btn-secondary px-8 py-3.5 text-base group">
             Explore Services 
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
