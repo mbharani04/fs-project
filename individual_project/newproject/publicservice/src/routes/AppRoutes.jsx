@@ -37,6 +37,7 @@ import {
   MedicalFunds, 
   SocialServices 
 } from '../pages/SimplePages';
+import EqualRights from '../FundamentalRights/EqualRights';
 
 const AppRoutes = () => {
   return (
@@ -57,6 +58,7 @@ const AppRoutes = () => {
           <Route path="/latest-news" element={<LatestNews />} />
           <Route path="/government-schemes" element={<GovernmentSchemes />} />
           <Route path="/public-rights" element={<PublicRights />} />
+          <Route path="/equal-rights" element={<EqualRights />} />
           <Route path="/job-opportunities" element={<JobOpportunities />} />
           <Route path="/free-education" element={<FreeEducationSchemes />} />
           <Route path="/data-transparency" element={<DataTransparency />} />
