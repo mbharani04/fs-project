@@ -10,12 +10,12 @@ const PublicRights = () => {
     { title: "Public Safety Rights", desc: "Prohibition of human trafficking and forced labor.", link: "#" },
     { title: "Politics information", desc: "Freedom of conscience and free profession of religion.", link: "#" },
     { title: "Right to Education (RTE)", desc: "Protection of interests of minorities.", link: "#" },
-    { title: "Child RightsConsumer Rights", desc: "Right to move courts for enforcement of fundamental rights.", link: "#" }
+    { title: "Child Rights", desc: "Right to move courts for enforcement of fundamental rights.", link: "#" }
   ];
 
   return (
-    <GenericPage 
-      title="Public Rights Awareness" 
+    <GenericPage
+      title="Public Rights Awareness"
       description="Understand your fundamental rights as a citizen. Knowledge is your strongest shield."
     >
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
