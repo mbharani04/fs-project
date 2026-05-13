@@ -6,7 +6,7 @@ import { ShieldCheck, Info } from 'lucide-react';
 const PublicRights = () => {
   const rights = [
     { title: "Fundamental Rights", desc: "Equality before law and equal protection of laws.", link: "/equal-rights" },
-    { title: "Women rights", desc: "Freedom of speech, expression, assembly, and movement.", link: "#" },
+    { title: "Right to Freedom", desc: "Freedom of speech, expression, assembly, and movement.", link: "/equal-freedom" },
     { title: "Public Safety Rights", desc: "Prohibition of human trafficking and forced labor.", link: "#" },
     { title: "Politics information", desc: "Freedom of conscience and free profession of religion.", link: "#" },
     { title: "Right to Education (RTE)", desc: "Protection of interests of minorities.", link: "#" },
