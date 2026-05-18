@@ -1,17 +1,13 @@
 
 
 
-3. js_day32: interview upload  git link but not finish5. js_day38: not started
-6. Day 40 - useEffect Hook (basic usage, dependencies)   not started
-7. Day 41 - React Router DOM: Installation, BrowserRouter, Routes, Route, Link
-8. Day 42 - UI Styling: Tailwind CSS basics, usage in React
-
-
-
-
-
-
-11. Test (25-04-2026) - not started
+1. js_day32: interview upload  git link but not finish5. js_day38: not started
+2. Day 40 - useEffect Hook (basic usage, dependencies)   not started
+3. Day 41 - React Router DOM: Installation, BrowserRouter, Routes, Route, Link
+4. Day 42 - UI Styling: Tailwind CSS basics, usage in React
+5. Day 44 - Redux Basics: store, actions, reducers (overview only)
+6. day 46
+7. Test (25-04-2026) - not started
 
 
 react:38
@@ -19,7 +15,12 @@ interview documents
 
 
 
+missed assignment:
+js:
+Day 30 - Async Await Process
 
+react:
+Day 39 - Forms handling in React (controlled components)
 
 
 
