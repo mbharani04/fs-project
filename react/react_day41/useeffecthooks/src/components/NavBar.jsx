@@ -7,8 +7,9 @@ const NavBar = () => {
     <div>
         <div>logo</div>
         <div>
-            <Link path = "/">Home</Link>
-            <Link path = "/form">Form Handling</Link>
+            <Link path = "/">Form Handling</Link>
+            <Link path = "/arraylooping">ArrayLooping</Link>
+            <Link path = "/fetchapi">FetchApi</Link>
         </div>
     </div>
     

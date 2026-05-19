@@ -1,38 +1,80 @@
-import { useState } from "react"
+import React, { useState } from "react";
 
+function RegisterForm() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-const FormHandling = () => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-const [data, setData] = useState([username: "", useremail:"", usermobile:""])
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-const handleClick = (e)=>{
-    setData({...Data, [e.target.name]: e.target.value})
-}
+    // Get old data
+    const oldData = JSON.parse(localStorage.getItem("users")) || [];
 
-const datasaving = localStorage.setItem("tasklist",JSON.stringify(Data))
+    // Add new data
+    const newData = [...oldData, formData];
+
+    // Save in localStorage
+    localStorage.setItem("users", JSON.stringify(newData));
+
+    alert("Registered Successfully");
+
+    // Clear form
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+    });
+  };
 
   return (
-    <>
-    <div>formhandling</div>
     <div>
-       <div>
-        <form>
-            <input type="text"   name = "username"  value ={data.username} placeholder="enter your name" />
-             <input type="email" name ="useremail"  value ={data.useremail} placeholder="enter your email" />
-              <input type="tel"  name ="usermobile" value ={data.usermobile} placeholder="enter your mobile" />
-          <button onClick = {handleClick}>Register</button>
+      <h2>Register Form</h2>
 
-    
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Enter Name"
+          value={formData.name}
+          onChange={handleChange}
+        />
 
+        <br /><br />
 
-              
-        </form>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter Email"
+          value={formData.email}
+          onChange={handleChange}
+        />
 
-       </div>
-       
+        <br /><br />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter Password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+
+        <br /><br />
+
+        <button type="submit">Register</button>
+      </form>
     </div>
-    </>
-  )
+  );
 }
 
-export default FormHandling
+export default RegisterForm;
