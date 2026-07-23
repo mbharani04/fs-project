@@ -1,0 +1,44 @@
+steps to follow
+
+1. installation of react-router-dom
+2. created structure of client and server
+3. start from server (backend)
+     -- installation of mongodb and mongooseshell
+	 -- make an connection
+	 
+config/db.js:
+
+const mongoose = require("mongoose");
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect("mongodb://localhost:27017/publicservice");
+
+    console.log("MongoDB Connected");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = connectDB;
+---------------------------------------------------------main file for backend --------------------------------
+mainfile = server.js:
+
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db");
+
+const app = express();
+connectDB();
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+
+  res.send("Backend Running");
+});
+
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
+

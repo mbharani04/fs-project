@@ -1,0 +1,242 @@
+/* ─────────────────────────────────────────────────────────────
+   Component-Specific Styles for Quick Understanding Cards
+   Scoped strictly to PublicRights.jsx
+   ───────────────────────────────────────────────────────────── */
+
+/* Card Base Styles */
+.quick-understanding-card {
+  position: relative;
+  overflow: hidden;
+  will-change: transform, box-shadow;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+}
+
+/* Hover State - Lift + Scale */
+.quick-understanding-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Color-Matched Soft Shadow & Border Glow */
+.quick-understanding-card[data-color="blue"]:hover {
+  box-shadow: 0 14px 30px -6px rgba(59, 130, 246, 0.22), 0 4px 12px -2px rgba(59, 130, 246, 0.14);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.quick-understanding-card[data-color="indigo"]:hover {
+  box-shadow: 0 14px 30px -6px rgba(99, 102, 241, 0.22), 0 4px 12px -2px rgba(99, 102, 241, 0.14);
+  border-color: rgba(99, 102, 241, 0.45);
+}
+
+.quick-understanding-card[data-color="red"]:hover {
+  box-shadow: 0 14px 30px -6px rgba(239, 68, 68, 0.22), 0 4px 12px -2px rgba(239, 68, 68, 0.14);
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.quick-understanding-card[data-color="amber"]:hover {
+  box-shadow: 0 14px 30px -6px rgba(245, 158, 11, 0.22), 0 4px 12px -2px rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.45);
+}
+
+.quick-understanding-card[data-color="green"]:hover {
+  box-shadow: 0 14px 30px -6px rgba(34, 197, 94, 0.22), 0 4px 12px -2px rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.45);
+}
+
+.quick-understanding-card[data-color="purple"]:hover {
+  box-shadow: 0 14px 30px -6px rgba(168, 85, 247, 0.22), 0 4px 12px -2px rgba(168, 85, 247, 0.14);
+  border-color: rgba(168, 85, 247, 0.45);
+}
+
+/* Diagonal Shine Sweep Animation */
+.quick-understanding-card__shine {
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.quick-understanding-card:hover .quick-understanding-card__shine {
+  animation: quick-shine-sweep 0.75s ease-out forwards;
+}
+
+@keyframes quick-shine-sweep {
+  0% {
+    left: -70%;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+/* Icon Container Hover Animation */
+.quick-understanding-card__icon {
+  will-change: transform;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s ease;
+}
+
+.quick-understanding-card:hover .quick-understanding-card__icon {
+  transform: scale(1.1) rotate(4deg);
+}
+
+/* Title Hover Styling */
+.quick-understanding-card__title {
+  transition: color 0.3s ease;
+}
+
+.quick-understanding-card:hover .quick-understanding-card__title {
+  color: #0f172a;
+}
+
+/* Description Text Styling */
+.quick-understanding-card__description {
+  transition: color 0.3s ease;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   Jump to Article Component Styles
+   Scoped strictly to PublicRights.jsx
+   ───────────────────────────────────────────────────────────── */
+
+.public-rights-jump-article {
+  position: relative;
+  width: 100%;
+}
+
+.public-rights-jump-article__title {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8; /* slate-400 */
+  margin-bottom: 0.75rem;
+}
+
+.public-rights-jump-article__scroll {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+/* Custom Scrollbar styling for Jump to Article container */
+.public-rights-jump-article__scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.public-rights-jump-article__scroll::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 9999px;
+}
+
+.public-rights-jump-article__scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.public-rights-jump-article__scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.public-rights-jump-article__list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.public-rights-jump-article__item {
+  flex-shrink: 0;
+  border-radius: 0.75rem; /* 12px rounded-xl */
+  padding: 0.375rem 0.75rem; /* px-3 py-1.5 */
+  font-size: 0.75rem; /* 12px text-xs */
+  font-weight: 600;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #e2e8f0; /* slate-200 */
+  background-color: #ffffff; /* white */
+  color: #334155; /* slate-700 */
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Hover Effect */
+.public-rights-jump-article__item:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  border-color: #93c5fd; /* blue-300 */
+  background-color: #eff6ff; /* blue-50 */
+  color: #1d4ed8; /* blue-700 */
+}
+
+/* Omitted Article Items */
+.public-rights-jump-article__item--omitted {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #ef4444;
+  text-decoration: line-through;
+}
+
+/* Active State Styling - Matches screenshot (light pink/red pill) */
+.public-rights-jump-article__item--active {
+  background-color: #fef2f2 !important; /* red-50 / rose-50 */
+  border-color: #fecaca !important; /* red-200 / rose-200 */
+  color: #dc2626 !important; /* red-600 */
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15) !important;
+}
+
+.public-rights-jump-article__item--active:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 14px rgba(220, 38, 38, 0.2) !important;
+}
+
+/* Keyboard Focus State */
+.public-rights-jump-article__item:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .quick-understanding-card,
+  .quick-understanding-card__icon,
+  .quick-understanding-card__shine,
+  .quick-understanding-card__title,
+  .public-rights-jump-article__item,
+  .public-rights-jump-article__scroll {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
